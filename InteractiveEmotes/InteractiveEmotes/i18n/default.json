@@ -1,0 +1,8 @@
+﻿{
+  "config.delay.name": "NPC Reaction Delay (ms)",
+  "config.delay.tooltip": "Delay before NPC plays the emote.",
+  "config.distance.name": "Event Distance (tiles)",
+  "config.distance.tooltip": "Max distance in tiles for NPC to react.",
+  "log.mod_loaded": "InteractiveEmotes loaded: distance={dist}, delay={delay}",
+  "log.error": "Error in emote handler:"
+}

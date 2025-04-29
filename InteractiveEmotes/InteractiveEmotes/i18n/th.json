@@ -1,0 +1,8 @@
+﻿{
+  "config.delay.name": "ดีเลย์การตอบสนอง NPC (มิลลิวินาที)",
+  "config.delay.tooltip": "ดีเลย์ (มิลลิวินาที) ก่อนที่ NPC จะแสดงอีโมต",
+  "config.distance.name": "ระยะเหตุการณ์ (Tiles)",
+  "config.distance.tooltip": "ระยะสูงสุด (Tiles) ที่ NPC จะตอบสนอง",
+  "log.mod_loaded": "InteractiveEmotes loaded: distance={dist}, delay={delay}",
+  "log.error": "Error in emote handler:"
+}
