@@ -1,0 +1,15 @@
+{
+  "Name": "Interactive Emotes",
+  "Author": "saikanyass",
+  "Version": "1.1.0",
+  "Description": "An emote interactive with NPC",
+  "UniqueID": "saikanyass.InteractiveEmotes",
+  "EntryDll": "InteractiveEmotes.dll",
+  "UpdateKeys": [],
+  "Dependencies": [
+    {
+      "UniqueID": "Pathoschild.ContentPatcher",
+      "IsRequired": true
+    }
+  ]
+}

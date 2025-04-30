@@ -1,0 +1,11 @@
+﻿{
+  "config.delay.name": "NPC Reaction Delay (ms)",
+  "config.delay.tooltip": "Delay before NPC plays the emote.",
+  "config.distance.name": "Event Distance (tiles)",
+  "config.distance.tooltip": "Max distance in tiles for NPC to react.",
+  "config.gain.name": "Friendship Points",
+  "config.gain.tooltip": "Friendship points to be gained after using an emote with an NPC, Once per day, set to 0 to disable( 1 Heart Mean 250 point). ",
+  "log.mod_loaded": "InteractiveEmotes loaded: distance={dist}, delay={delay}",
+  "log.error": "Error in emote handler:"
+
+}
