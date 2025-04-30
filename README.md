@@ -15,6 +15,12 @@ Interact with villagers, your horse, pet dog or cat — just by emoting near the
 2. Extract this mod into your `Mods` folder.
 3. Run the game using `SMAPI`.
 
+Supported Languages
+
+* [x] English (Default)
+* [x] Thai
+* [x] Turkish
+
 ## ⚙️ Configuration
 
 You can change:
@@ -29,10 +35,6 @@ Edit `config.json` manually or use GMCM in-game.
 - ✅ Works in both single-player and multiplayer
 - ✅ Supports PC and mobile versions
 
-## 🌐 Translations
-
-- default English
-- 🇹🇭 Thai
 
 ## 📥 Download
 
