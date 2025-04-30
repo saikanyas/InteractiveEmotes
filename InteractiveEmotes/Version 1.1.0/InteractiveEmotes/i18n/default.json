@@ -1,11 +1,11 @@
 ﻿{
-  "config.delay.name": "NPC Reaction Delay (ms)",
-  "config.delay.tooltip": "Delay before NPC plays the emote.",
-  "config.distance.name": "Event Distance (tiles)",
-  "config.distance.tooltip": "Max distance in tiles for NPC to react.",
-  "config.gain.name": "Friendship Points",
-  "config.gain.tooltip": "Friendship points to be gained after using an emote with an NPC, Once per day, set to 0 to disable( 1 Heart Mean 250 point). ",
-  "log.mod_loaded": "InteractiveEmotes loaded: distance={dist}, delay={delay}",
-  "log.error": "Error in emote handler:"
-
+  "log.error": "Interactive Emotes error:",
+  "config.delay.name": "Emote Delay",
+  "config.delay.tooltip": "Delay in milliseconds before NPCs react to your emotes.",
+  "config.distance.name": "Interaction Distance",
+  "config.distance.tooltip": "Distance in tiles within which NPCs will react.",
+  "config.friendship.amount.name": "Friendship Gain",
+  "config.friendship.amount.tooltip": "How many friendship points to gain when an NPC responds to your emote( 1 Heart = 250 point).Set to 0 for disable this function",
+  "config.friendship.notify.name": "Show Friendship Gain Message",
+  "config.friendship.notify.tooltip": "If true, show a message when friendship is gained from emote."
 }

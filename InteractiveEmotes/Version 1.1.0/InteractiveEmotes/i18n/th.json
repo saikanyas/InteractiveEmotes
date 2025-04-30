@@ -1,10 +1,11 @@
 ﻿{
-  "config.delay.name": "ดีเลย์การตอบสนอง NPC (มิลลิวินาที)",
-  "config.delay.tooltip": "ดีเลย์ (มิลลิวินาที) ก่อนที่ NPC จะแสดงอีโมต",
-  "config.distance.name": "ระยะเหตุการณ์ (Tiles)",
-  "config.distance.tooltip": "ระยะสูงสุด (Tiles) ที่ NPC จะตอบสนอง",
-  "config.gain.name": "ค่าความสัมพันธ์",
-  "config.gain.tooltip": "คือค่าความสัมพันธ์ที่จะได้รับหลังจากกดอีโมต (หนึ่งครั้งต่อวัน) เซทค่าเป็น 0 เพื่อปิดใช้งาน ( 1 ใจ หมายถึง 250 แต้ม)",
-  "log.mod_loaded": "InteractiveEmotes loaded: distance={dist}, delay={delay}",
-  "log.error": "Error in emote handler:"
+  "log.error": "Interactive Emotes error:",
+  "config.delay.name": "ดีเลย์ก่อนแสดง Emote",
+  "config.delay.tooltip": "ระยะเวลาดีเลย์ (ms:มิลลิวินาที) ก่อนที่ NPC จะตอบสนอง emote ของผู้เล่น",
+  "config.distance.name": "ระยะการโต้ตอบ",
+  "config.distance.tooltip": "ระยะ (tile) ที่ NPC จะสามารถตอบสนอง emote ได้",
+  "config.friendship.amount.name": "ค่าความสัมพันธ์ที่ได้รับ ( 1 ใจ คือ 250 แต้ม) ปรับเป็นศูนย์ถ้าไม่ต้องการใช้งานระบบนี้",
+  "config.friendship.amount.tooltip": "จำนวนค่าความสัมพันธ์ที่เพิ่มเมื่อ NPC ตอบกลับ emote",
+  "config.friendship.notify.name": "แสดงข้อความเพิ่มค่าความสัมพันธ์",
+  "config.friendship.notify.tooltip": "หากเปิดจะแสดงข้อความ เมื่อมีการเพิ่มค่าความสัมพันธ์จาก emote"
 }
