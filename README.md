@@ -15,7 +15,7 @@ Interact with villagers, your horse, pet dog or cat — just by emoting near the
 2. Extract this mod into your `Mods` folder.
 3. Run the game using `SMAPI`.
 
-Supported Languages
+## 🌏 Support Language
 
 * [x] English (Default)
 * [x] Thai
