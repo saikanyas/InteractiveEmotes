@@ -1,0 +1,11 @@
+﻿{
+  "log.error": "Interactive Emotes error:",
+  "config.delay.name": "ดีเลย์ก่อนแสดง Emote",
+  "config.delay.tooltip": "ระยะเวลาดีเลย์ (ms:มิลลิวินาที) ก่อนที่ NPC จะตอบสนอง emote ของผู้เล่น",
+  "config.distance.name": "ระยะการโต้ตอบ",
+  "config.distance.tooltip": "ระยะ (tile) ที่ NPC จะสามารถตอบสนอง emote ได้",
+  "config.friendship.amount.name": "จำนวนค่าความสัมพันธ์ที่เพิ่มเมื่อ NPC ตอบกลับ emote ",
+  "config.friendship.amount.tooltip": "ค่าความสัมพันธ์ที่ได้รับ ( 1 ใจ คือ 250 แต้ม) ปรับเป็นศูนย์ถ้าไม่ต้องการใช้งานระบบนี้",
+  "config.friendship.notify.name": "แสดงข้อความเพิ่มค่าความสัมพันธ์",
+  "config.friendship.notify.tooltip": "หากเปิดจะแสดงข้อความ เมื่อมีการเพิ่มค่าความสัมพันธ์จาก emote"
+}

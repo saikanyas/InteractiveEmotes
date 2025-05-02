@@ -1,0 +1,11 @@
+﻿{
+  "log.error": "Interactive Emotes error:",
+  "config.delay.name": "Emoji gecikmesi",
+  "config.delay.tooltip": "NPC'ler ifadelerinize tepki vermeden önce milisaniye cinsinden gecikmesi ayarlar.",
+  "config.distance.name": "Etkileşim için gerekli Mesafe",
+  "config.distance.tooltip": "NPC'lerin tepki vereceği uzaklık cinsinden gerekli mesafeyi ayarlar.",
+  "config.friendship.amount.name": "Friendship Gain",
+  "config.friendship.amount.tooltip": "Bir NPC ifadenize yanıt verdiğinde kaç arkadaşlık puanı kazanacağınızı ayarlar( 1 Heart = 250 point).Bu işlevi devre dışı bırakmak için lütfen değeri 0 olarak ayarlayın.",
+  "config.friendship.notify.name": "Arkadaşlık gösterdiğin kişiler arasındaki Kazanç Mesajını Gösterir",
+  "config.friendship.notify.tooltip": "Eğer arkadaşlık puanı kazandıysan, emoji ile arkadaşlık kazanıldığında bir mesaj göster."
+}
