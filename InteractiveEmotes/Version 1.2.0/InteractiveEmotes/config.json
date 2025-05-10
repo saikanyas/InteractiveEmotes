@@ -1,0 +1,10 @@
+{
+  "EventDistance": 3,
+  "EmoteDelay": 1000,
+  "FriendshipGainAmount": 10,
+  "ShowFriendshipGainMessage": true,
+  "EventDistanceInPixels": 192,
+  "EmoteCombo": true,
+  "EmoteComboTarget": 3,
+  "PlayReplySound": true
+}
