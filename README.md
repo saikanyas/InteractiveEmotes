@@ -24,7 +24,7 @@ when you perform an emote, the nearby NPCs will respond with their own expressio
 * Increase relationship points when using an emote.
 * NPCs respond differently when the same emote is used repeatedly. (New feature in version 1.2.0)
 * All feature can be disable in config file or in Generic Mod Config Menu
-* Customize your conditions by editing the JSON file according to [this guide](#). **_(Note: It's still a bit tricky at this moment.)_**
+* Customize your conditions by editing the JSON file according to [this guide](#json-customization). **_(Note: It's still a bit tricky at this moment.)_**
 <br><br>
 ## How to Use
 
