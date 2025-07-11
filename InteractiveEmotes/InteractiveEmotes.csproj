@@ -10,28 +10,22 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="โค้ดที่ทำงานได้\**" />
-	  <EmbeddedResource Remove="โค้ดที่ทำงานได้\**" />
-	  <None Remove="โค้ดที่ทำงานได้\**" />
+		<PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0" />
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>C:\Program Files (x86)\Steam\steamapps\common\Stardew Valley\smapi-internal\Newtonsoft.Json.dll</HintPath>
+		</Reference>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Reference Include="Newtonsoft.Json">
-	    <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\Stardew Valley\smapi-internal\Newtonsoft.Json.dll</HintPath>
-	  </Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="assets\combos.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="assets\reactions.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+		<None Update="assets\combos.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="assets\reactions.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

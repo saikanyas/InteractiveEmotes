@@ -993,7 +993,8 @@
           ],
           "DisplayText": [
             "combo.npc.manySayNo",
-            "combo.npc.manySayNo2"
+            "combo.npc.manySayNo2",
+            "combo.npc.manySayNo3"
           ]
         }
       }
@@ -1290,7 +1291,8 @@
           "Emote": "no",
           "DisplayText": [
             "combo.npc.manySayNo",
-            "combo.npc.manySayNo2"
+            "combo.npc.manySayNo2",
+            "combo.npc.manySayNo3"
           ]
         }
       }
@@ -1489,7 +1491,7 @@
           "DisplayText": [
             "combo.npc.many!",
             "combo.npc.manySurprised1",
-            "combo.npc.new.manySurprised2"
+            "combo.npc.manySurprised2"
           ]
         }
       }
