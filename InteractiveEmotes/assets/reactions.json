@@ -1,0 +1,386 @@
+﻿{
+  "happy": {
+    "Reactions": [
+      {
+        "Conditions": { "CharacterType": [ "Baby", "Pet", "FarmAnimal" ] },
+        "Action": { "Emote": "happy" }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 1000 },
+        "Action": { "Emote": "happy" }
+      },
+      {
+        "Action": { "Emote": "happy" }
+      }
+    ]
+  },
+
+
+
+  "sad": {
+    "Reactions": [
+      {
+        "Conditions": { "CharacterType": [ "Baby", "Pet", "FarmAnimal" ] },
+        "Action": { "Emote": "question" }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 1000 },
+        "Action": { "Emote": "sad" }
+      },
+      {
+        "Action": { "Emote": "question" }
+      }
+    ]
+  },
+
+
+
+  "heart": {
+    "Reactions": [
+      {
+        "Conditions": { "CharacterType": [ "Baby", "Pet", "FarmAnimal" ] },
+        "Action": { "Emote": "heart" }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 2500 },
+        "Action": { "Emote": "heart" }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 2000 },
+        "Action": { "Emote": "blush" }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 1000 },
+        "Action": { "Emote": "happy" }
+      },
+      {
+        "Action": { "Emote": "question" }
+      }
+    ]
+  },
+
+
+
+  "exclamation": {
+    "Reactions": [
+      {
+        "Action": {
+          "Emote": "exclamation"
+        }
+      }
+    ]
+  },
+
+
+  "note": {
+    "Reactions": [
+      {
+        "Conditions": { "CharacterType": [ "Baby", "Pet", "FarmAnimal" ] },
+        "Action": { "Emote": "happy" }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 1250 },
+        "Action": {
+          "Emote": "note"
+        }
+      },
+      {
+        "Action": {
+          "Emote": "question"
+        }
+      }
+    ]
+  },
+
+
+
+  "sleep": {
+    "Reactions": [
+      {
+        "Conditions": { "CharacterType": [ "Baby", "Pet", "FarmAnimal" ] },
+        "Action": { "Emote": "happy" }
+      },
+      {
+        "Action": {
+          "Emote": "sleep"
+        }
+      }
+    ]
+  },
+
+
+
+  "game": {
+    "Reactions": [
+      {
+        "Conditions": { "CharacterType": [ "Baby", "Pet", "FarmAnimal" ] },
+        "Action": { "Emote": "question" }
+      },
+      {
+        "Conditions": { "Name": "Sam" },
+        "Action": {
+          "Emote": "anim_game"
+        }
+      },
+      {
+        "Conditions": { "Name": "Sebastian" },
+        "Action": {
+          "Emote": "anim_game"
+        }
+      },
+      {
+        "Conditions": { "Name": "Abigail" },
+        "Action": {
+          "Emote": "anim_game"
+        }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 750 },
+        "Action": "happy"
+      },
+      {
+        "Action": {
+          "Emote": "question"
+        }
+      }
+    ]
+  },
+
+
+
+  "question": {
+    "Reactions": [
+      {
+        "Action": {
+          "Emote": "question"
+        }
+      }
+    ]
+  },
+
+
+  "x": {
+    "Reactions": [
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 750 },
+        "Action": {
+          "Emote": "sad"
+        }
+      },
+      {
+        "Action": {
+          "Emote": "no"
+        }
+      }
+    ]
+  },
+
+
+
+  "pause": {
+    "Reactions": [
+      {
+        "Action": {
+          "Emote": [
+            "pause",
+            "question",
+            "pause"
+          ]
+        }
+      }
+    ]
+  },
+
+
+
+  "angry": {
+    "Reactions": [
+      {
+        "Conditions": { "CharacterType": [ "Pet", "FarmAnimal" ] },
+        "Action": { "Emote": "question" }
+      },
+      {
+        "Conditions": { "CharacterType": "Baby" },
+        "Action": {
+          "Emote": "sad"
+        }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 1000 },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [ "reaction.npc.angry.friend1", "reaction.npc.angry.friend2" ]
+        }
+      },
+      {
+        "Action": {
+          "Emote": "angry",
+          "DisplayText": [ "reaction.npc.angry.default", "combo.npc.manyAngry", "reaction.npc.angry.default" ]
+        }
+      }
+    ]
+  },
+
+
+  "yes": {
+    "Reactions": [
+      {
+        "Action": {
+          "Emote": "happy"
+        }
+      }
+    ]
+  },
+
+
+
+  "no": {
+    "Reactions": [
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 1000 },
+        "Action": {
+          "Emote": "sad"
+        }
+      },
+      {
+        "Action": {
+          "Emote": "x"
+        }
+      }
+    ]
+  },
+
+
+
+  "sick": {
+    "Reactions": [
+
+      {
+        "Conditions": { "CharacterType": [ "Baby", "FarmAnimal", "Pet" ] },
+        "Action": { "Emote": "exclamation" }
+      },
+      {
+        "Conditions": { "IsSpouse": true },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [ "reaction.npc.sick.spouse1", "reaction.npc.sick.spouse2", "reaction.npc.sick.spouse3" ]
+        }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 1000 },
+        "Action": {
+          "Emote": "sad",
+          "DisplayText": [ "reaction.npc.sick.friend1", "reaction.npc.sick.friend2", "reaction.npc.sick.friend3" ]
+        }
+      },
+      {
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [ "reaction.npc.sick.default1", "reaction.npc.sick.default2" ]
+        }
+      }
+    ]
+  },
+
+
+  "laugh": {
+    "Reactions": [
+      {
+        "Action": {
+          "Emote": "happy"
+        }
+      }
+    ]
+  },
+
+
+  "surprised": {
+    "Reactions": [
+      {
+        "Action": {
+          "Emote": [ "anim_exclamation", "anim_exclamation", "question" ]
+        }
+      }
+    ]
+  },
+
+
+
+  "hi": {
+    "Reactions": [
+      {
+        "Conditions": { "PetType": "Dog" },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [ "animal.dog.happy1", "animal.dog.happy2" ]
+        }
+      },
+      {
+        "Conditions": { "PetType": "Cat" },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": ["animal.cat.happy1","animal.cat.happy2"]
+        }
+      },
+      {
+        "Conditions": { "PetType": "Turtle" },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [ "animal.turtle.happy1", "animal.turtle.happy2" ]
+        }
+      },
+      {
+        "Conditions": { "CharacterType": "Baby" },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [ "npc.baby.happy1", "npc.baby.happy2" ]
+        }
+      },
+      {
+        "Conditions": { "PetType": "Horse" },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [ "animal.horse.happy1", "animal.horse.happy2" ]
+        }
+      },
+      {
+        "Conditions": { "IsSpouse": true },
+        "Action": {
+          "Emote": "heart",
+          "DisplayText": [ "greeting.hi.spouse1", "greeting.hi.spouse2" ]
+        }
+      },
+      {
+        "Conditions": { "IsDateable": true, "IsSpouse": false },
+        "Action": {
+          "Emote": "blush",
+          "DisplayText": [ "greeting.hi.dateable1", "greeting.hi.dateable2" ]
+        }
+      },
+      {
+        "Conditions": { "FriendshipGreaterThanOrEqualTo": 1000 },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [ "greeting.hi.friend1", "greeting.hi.friend2" ]
+        }
+      },
+      {
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [ "greeting.hi.normal1", "greeting.hi.normal2" ]
+        }
+      }
+    ]
+  },
+
+
+  "uh": {
+    "Reactions": [
+      {
+        "Action": {
+          "Emote": "pause"
+        }
+      }
+    ]
+  }
+}

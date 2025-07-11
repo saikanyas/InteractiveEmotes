@@ -1,0 +1,1596 @@
+﻿{
+  "happy": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 4,
+        "Action": {
+          "Emote": "happy"
+        }
+      },
+      {
+        "Conditions": {
+          "FriendshipGreaterThanOrEqualTo": 1000
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "combo.npc.manyHappy2",
+            "combo.npc.manyHappy",
+            "combo.npc.manyHappy"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 5,
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "combo.npc.manyHappy.normal1",
+            "combo.npc.manyHappy.normal2"
+          ]
+        }
+      }
+    ]
+  },
+
+
+
+  "heart": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "heart",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "heart",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "heart",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "heart",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "heart",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 4,
+        "Action": {
+          "Emote": "heart"
+        }
+      },
+      {
+        "Conditions": {
+          "IsSpouse": true
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "blush",
+            "heart"
+          ],
+          "DisplayText": [
+            "combo.npc.manylove.withlover",
+            "combo.npc.manylove.withlover2",
+            "combo.npc.manylove.withlover3"
+          ]
+        }
+      },
+      {
+        "Conditions": {
+          "FriendshipGreaterThanOrEqualTo": 2000,
+          "IsDateable": true
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "blush",
+            "blush",
+            "heart"
+          ],
+          "DisplayText": [
+            "combo.npc.manylove.withlover",
+            "combo.npc.manylove.withlover2",
+            "combo.npc.manylove.withlover3"
+          ]
+        }
+      },
+      {
+        "Conditions": {
+          "FriendshipGreaterThanOrEqualTo": 1500
+        },
+        "TriggerCount": 4,
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "combo.npc.withnotlover.enoughfriendship",
+            "combo.npc.withnotlover.enoughfriendship2",
+            "combo.npc.withnotlover.enoughfriendship3"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 2,
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "combo.npc.manylove.withnotlover",
+            "combo.npc.manylove.withnotlover2",
+            "combo.npc.manylove.withnotlover3"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "exclamation": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 4,
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": "combo.npc.many!"
+        }
+      },
+      {
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "combo.npc.many!",
+            "combo.npc.many!2"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "note": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "note",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "note",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "note",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "note",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "note",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "note",
+            "question",
+            "note"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 4,
+        "Action": {
+          "Emote": "note",
+          "DisplayText": [
+            "combo.npc.manyHappyNote",
+            "combo.npc.manyHappyNote2",
+            "combo.npc.manyHappyNote3"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "sad": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "sad",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "sad",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "sad",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "sad",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "sad",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "sad",
+            "question",
+            "question"
+          ]
+        }
+      },
+      {
+        "Conditions": {
+          "FriendshipGreaterThanOrEqualTo": 2000,
+          "IsSpouse": true
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "sad",
+            "sad",
+            "question"
+          ],
+          "DisplayText": [
+            "reaction.npc.sad.spouse1",
+            "reaction.npc.sad.spouse2",
+            "reaction.npc.sad.spouse3"
+          ]
+        }
+      },
+      {
+        "Conditions": {
+          "FriendshipGreaterThanOrEqualTo": 2000,
+          "IsDateable": true
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "sad",
+            "sad",
+            "question"
+          ],
+          "DisplayText": [
+            "reaction.npc.sad.spouse1",
+            "reaction.npc.sad.spouse2",
+            "reaction.npc.sad.spouse3"
+          ]
+        }
+      },
+      {
+        "Conditions": {
+          "FriendshipGreaterThanOrEqualTo": 1500
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "sad",
+            "sad",
+            "question"
+          ],
+          "DisplayText": [
+            "reaction.npc.sad.friend1",
+            "reaction.npc.sad.friend2",
+            "reaction.npc.sad.friend3"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 4,
+        "Action": {
+          "Emote": [
+            "sad",
+            "question",
+            "question"
+          ],
+          "DisplayText": [
+            "combo.npc.manySad",
+            "combo.npc.manySad2"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "sleep": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "sleep",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "sleep",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "sleep",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "sleep",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "sleep",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 4,
+        "Action": {
+          "Emote": "sleep"
+        }
+      },
+      {
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": "sleep",
+          "DisplayText": [
+            "combo.npc.manySleep",
+            "combo.npc.manySleep2"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "game": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 5,
+        "Action": {
+          "Emote": "question"
+        }
+      },
+      {
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": "anim_game",
+          "DisplayText": [
+            "combo.npc.manyGame1",
+            "combo.npc.manyGame2",
+            "combo.npc.manyGame3",
+            "combo.npc.manyGame4"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "question": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 4,
+        "Action": {
+          "Emote": [
+            "question",
+            "question",
+            "question",
+            "angry"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "question",
+            "angry",
+            "question",
+            "question"
+          ],
+          "DisplayText": [
+            "combo.npc.Question",
+            "combo.npc.Question2",
+            "combo.npc.Question3",
+            "combo.npc.Question4"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "x": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 5,
+        "Action": {
+          "Emote": [
+            "question",
+            "x",
+            "question"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 2,
+        "Action": {
+          "Emote": [
+            "x",
+            "angry",
+            "no"
+          ],
+          "DisplayText": [
+            "combo.npc.manySayNo",
+            "combo.npc.manySayNo2"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "pause": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 2,
+        "Action": {
+          "Emote": [
+            "question",
+            "pause"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "pause",
+            "question"
+          ],
+          "DisplayText": [
+            "combo.npc.manyPause",
+            "combo.npc.manyPause2"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "yes": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": [
+            "happy",
+            "question",
+            "happy"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "combo.npc.new.manyYes1",
+            "combo.npc.new.manyYes2",
+            "combo.npc.new.manyYes3"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "no": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 2,
+        "Action": {
+          "Emote": [
+            "question",
+            "x",
+            "question"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 2,
+        "Action": {
+          "Emote": "no",
+          "DisplayText": [
+            "combo.npc.manySayNo",
+            "combo.npc.manySayNo2"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "laugh": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 2,
+        "Action": {
+          "Emote": [
+            "happy",
+            "note",
+            "happy"
+          ]
+        }
+      },
+      {
+        "Conditions": {
+          "FriendshipGreaterThanOrEqualTo": 1000
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": "happy",
+          "DisplayText": [
+            "combo.npc.manyHappy",
+            "combo.npc.manyHappy3"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "surprised": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "exclamation",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": "exclamation"
+        }
+      },
+      {
+        "TriggerCount": 2,
+        "Action": {
+          "Emote": [
+            "anim_exclamation",
+            "question"
+          ],
+          "DisplayText": [
+            "combo.npc.many!",
+            "combo.npc.manySurprised1",
+            "combo.npc.new.manySurprised2"
+          ]
+        }
+      }
+    ]
+  },
+
+
+  "uh": {
+    "ComboReactions": [
+      {
+        "Conditions": {
+          "PetType": "Dog"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "animal.dog.happy1",
+            "animal.dog.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Cat"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "animal.cat.happy1",
+            "animal.cat.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Turtle"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "animal.turtle.happy1",
+            "animal.turtle.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": "Baby"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "npc.baby.happy1",
+            "npc.baby.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "PetType": "Horse"
+        },
+        "Action": {
+          "Emote": "pause",
+          "DisplayText": [
+            "animal.horse.happy1",
+            "animal.horse.happy2"
+          ]
+        },
+        "TriggerCount": 4
+      },
+      {
+        "Conditions": {
+          "CharacterType": [
+            "Baby",
+            "Pet",
+            "FarmAnimal"
+          ]
+        },
+        "TriggerCount": 5,
+        "Action": {
+          "Emote": [
+            "question",
+            "pause"
+          ]
+        }
+      },
+      {
+        "TriggerCount": 3,
+        "Action": {
+          "Emote": "question",
+          "DisplayText": [
+            "combo.npc.new.manyUh1",
+            "combo.npc.new.manyUh2",
+            "combo.npc.new.manyUh3"
+          ]
+        }
+      }
+    ]
+  }
+}
