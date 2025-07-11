@@ -9,8 +9,8 @@ when you perform an emote, the nearby NPCs will respond with their own expressio
 * [Features](#features)
 * [Configure](#configure)
 * [Compatibility](#compatibility)
-* [Translation Guide](translation-guide)
-* [JSON Customization](json-customization)
+* [Translation Guide](#translation-guide)
+* [JSON Customization](#json-customization)
 
 ## Install
 1. Install the latest version of SMAPI.
