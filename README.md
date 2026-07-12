@@ -57,7 +57,12 @@ or the "mod options" button at the bottom of the in-game menu to configure the m
 ***<strong style="color: red;">If you are the translator or someone who want to customize this mod you should read these Docs</strong>***
 
 * **[Translation Guide](docs/TRANSLATION_GUIDE.md)** — Learn how to translate the mod into your language and use special tokens (`@`, `%farm%`, `^`, etc.).
-* **[JSON Customization Guide](docs/CUSTOMIZATION_GUIDE.md)** — A complete, step-by-step tutorial on how to create custom reactions, master conditions, and set up emote combos.
+* **[JSON Customization Guide](docs/CUSTOMIZATION_GUIDE.md)** — A complete, step-by-step tutorial on how to create custom reactions, master conditions, and set up emote combos.  
+*   
+  
+    
+      
+      
 
 <p align="center">
   <i><b>At least enjoy My mod (〜￣▽￣)〜</b></i>
