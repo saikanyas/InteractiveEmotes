@@ -1,9 +1,0 @@
-{
-  "Name": "Interactive Emotes",
-  "Author": "saikanyass",
-  "Version": "1.1.1",
-  "Description": "An emote interactive with NPC",
-  "UniqueID": "saikanyass.InteractiveEmotes",
-  "EntryDll": "InteractiveEmotes.dll",
-  "UpdateKeys": [ "Nexus:33624" ]
-}
