@@ -58,10 +58,8 @@ or the "mod options" button at the bottom of the in-game menu to configure the m
 
 * **[Translation Guide](docs/TRANSLATION_GUIDE.md)** — Learn how to translate the mod into your language and use special tokens (`@`, `%farm%`, `^`, etc.).
 * **[JSON Customization Guide](docs/CUSTOMIZATION_GUIDE.md)** — A complete, step-by-step tutorial on how to create custom reactions, master conditions, and set up emote combos.  
-*   
   
-    
-      
+<br><br><br><br><br>  
       
 
 <p align="center">
