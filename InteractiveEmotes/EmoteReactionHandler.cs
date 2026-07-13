@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Characters;
@@ -23,7 +23,6 @@ namespace InteractiveEmotes
         private readonly NpcAnimationHandler _animationHandler;
         private readonly EmoteComboHandler _comboHandler;
         private readonly Dictionary<long, HashSet<string>> _rewardedNpcsToday = new();
-        private static readonly Random _random = new();
 
         public EmoteReactionHandler(ModConfig config, IMonitor monitor, ITranslationHelper i18n, RuleProcessor ruleProcessor, Dictionary<string, EmoteReactionData> reactionRules, Dictionary<string, int> emoteNameToIdMap, NpcAnimationHandler animationHandler, EmoteComboHandler comboHandler)
         {
@@ -67,10 +66,13 @@ namespace InteractiveEmotes
                 foreach (var animal in animalHouse.animals.Values) { allCharactersInArea.Add(animal); }
             }
 
+            // Pre-compute squared distance threshold to avoid sqrt per character.
+            float distanceThresholdSquared = (float)_config.EventDistanceInPixels * _config.EventDistanceInPixels;
+
             bool interactionOccurred = false;
             foreach (Character character in allCharactersInArea)
             {
-                if (Vector2.Distance(character.Position, farmer.Position) > _config.EventDistanceInPixels)
+                if (Vector2.DistanceSquared(character.Position, farmer.Position) > distanceThresholdSquared)
                     continue;
 
                 // 2. Prioritize checking for combos first.
@@ -141,7 +143,7 @@ namespace InteractiveEmotes
                 else if (actionObject is JObject jObject)
                 {
                     try { action = jObject.ToObject<ComboAction>(); }
-                    catch (System.Exception ex)
+                    catch (Exception ex)
                     {
                         _monitor.Log($"Failed to parse complex Action object for immediate reaction. Error: {ex.Message}", LogLevel.Error);
                         return;
@@ -150,7 +152,7 @@ namespace InteractiveEmotes
                 if (action == null) return;
 
                 bool actionWasPerformed = false;
-                string? emoteToPerform = GetRandomEmote(action.Emote);
+                string? emoteToPerform = ActionHelper.GetRandomEmote(action.Emote);
 
                 if (emoteToPerform != null)
                 {
@@ -166,7 +168,7 @@ namespace InteractiveEmotes
                     }
                 }
 
-                string? textToDisplayKey = GetRandomEmote(action.DisplayText);
+                string? textToDisplayKey = ActionHelper.GetPooledText(action.DisplayText);
 
                 // If an emote was performed and there is text to display, wait a moment for a more natural flow.
                 if (actionWasPerformed && textToDisplayKey != null)
@@ -174,38 +176,10 @@ namespace InteractiveEmotes
                     await Task.Delay(1200); // Wait 1.2 seconds for the emote to finish.
                 }
 
-                // --- Logic for displaying text, with support for splitting long messages ---
                 if (textToDisplayKey != null && character is NPC npcForText)
                 {
-                    string translatedText = _i18n.Get(textToDisplayKey);
-
-                    // Check for the special '|' token to split the text.
-                    if (translatedText.Contains("|"))
-                    {
-                        string[] parts = translatedText.Split('|');
-                        for (int i = 0; i < parts.Length; i++)
-                        {
-                            string part = parts[i];
-                            string parsedPart = ParseTokens(part, npcForText);
-                            npcForText.showTextAboveHead(parsedPart);
-                            actionWasPerformed = true;
-
-                            // If this is not the last part, wait before showing the next one.
-                            if (i < parts.Length - 1)
-                            {
-                                await Task.Delay(1800); // Delay between text parts for readability.
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // If no token is found, display the text normally.
-                        string parsedText = ParseTokens(translatedText, npcForText);
-                        npcForText.showTextAboveHead(parsedText);
-                        actionWasPerformed = true;
-                    }
+                    actionWasPerformed = await ActionHelper.ShowTextAsync(textToDisplayKey, npcForText, _i18n);
                 }
-                // --- End of text display logic ---
 
                 if (actionWasPerformed)
                 {
@@ -220,6 +194,10 @@ namespace InteractiveEmotes
                     _monitor.Log(logBuilder.ToString(), LogLevel.Trace);
                 }
             }
+            catch (Exception ex)
+            {
+                _monitor.Log($"Unhandled error in ExecuteAction for '{character.Name}': {ex.Message}", LogLevel.Error);
+            }
             finally
             {
                 if (npcState != null)
@@ -227,22 +205,6 @@ namespace InteractiveEmotes
                     npcState.IsReacting = false;
                 }
             }
-        }
-
-        /// <summary>A helper method to get a single string from an object that can be either a string or an array of strings.</summary>
-        private string? GetRandomEmote(object? emoteObject)
-        {
-            if (emoteObject is null) return null;
-            if (emoteObject is string emoteString) return emoteString;
-            if (emoteObject is JArray jArray)
-            {
-                var emoteOptions = jArray.ToObject<List<string>>();
-                if (emoteOptions?.Count > 0)
-                {
-                    return emoteOptions[_random.Next(emoteOptions.Count)];
-                }
-            }
-            return null;
         }
 
         /// <summary>Tries to add friendship points to an NPC, respecting the once-per-day limit per player.</summary>
@@ -272,28 +234,6 @@ namespace InteractiveEmotes
                 Game1.addHUDMessage(new HUDMessage($"+{_config.FriendshipGainAmount} {npc.displayName}", HUDMessage.newQuest_type));
             }
             return true;
-        }
-
-        /// <summary>Parses dialogue tokens like @ and %spouse% from a string.</summary>
-        private string ParseTokens(string text, NPC speaker)
-        {
-            if (text.Contains('^'))
-            {
-                string[] parts = text.Split('^');
-                text = parts.Length >= 2 && !Game1.player.IsMale ? parts[1] : parts[0];
-            }
-            text = text.Replace("@", Game1.player.Name);
-            text = text.Replace("%farm", Game1.player.farmName.Value);
-            text = text.Replace("%favorite_thing", Game1.player.favoriteThing.Value);
-            if (Game1.player.hasPet())
-            {
-                text = text.Replace("%pet", Game1.player.getPetName());
-            }
-            if (speaker.getSpouse() != null)
-            {
-                text = text.Replace("%spouse", speaker.getSpouse().displayName);
-            }
-            return text;
         }
     }
 }

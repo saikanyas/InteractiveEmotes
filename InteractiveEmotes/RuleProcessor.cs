@@ -1,4 +1,4 @@
-﻿using StardewModdingAPI;
+using StardewModdingAPI;
 using StardewValley;
 using StardewValley.Characters;
 using System;
@@ -135,8 +135,8 @@ namespace InteractiveEmotes
         /// <summary>Gets the current weather as a simple string name.</summary>
         private string GetWeatherName()
         {
+            if (Game1.isLightning) return "Stormy"; // Must check before isRaining; lightning days also set isRaining = true.
             if (Game1.isRaining) return "Rainy";
-            if (Game1.isLightning) return "Stormy";
             if (Game1.isDebrisWeather) return "Windy";
             if (Game1.isSnowing) return "Snowy";
             return "Sunny";

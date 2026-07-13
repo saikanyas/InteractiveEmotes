@@ -1,9 +1,8 @@
-﻿using StardewModdingAPI;
+using StardewModdingAPI;
 using StardewValley;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using System.Text;
 
 namespace InteractiveEmotes
@@ -19,7 +18,6 @@ namespace InteractiveEmotes
         private readonly NpcAnimationHandler _animationHandler;
         /// <summary>Stores the combo state for each player and each character they interact with.</summary>
         private readonly Dictionary<long, Dictionary<string, NpcComboState>> _comboStates = new();
-        private static readonly Random _random = new();
 
         public EmoteComboHandler(ModConfig config, ITranslationHelper i18n, IMonitor monitor, RuleProcessor ruleProcessor, Dictionary<string, int> emoteNameToIdMap, NpcAnimationHandler animationHandler)
         {
@@ -93,7 +91,7 @@ namespace InteractiveEmotes
 
                 await Task.Delay(_config.EmoteDelay + Game1.random.Next(0, 300));
 
-                string? emoteToPerform = GetRandomEmote(action.Emote);
+                string? emoteToPerform = ActionHelper.GetRandomEmote(action.Emote);
                 bool emoteWasPerformed = false;
 
                 if (emoteToPerform != null)
@@ -110,7 +108,7 @@ namespace InteractiveEmotes
                     }
                 }
 
-                string? textToDisplayKey = GetRandomEmote(action.DisplayText);
+                string? textToDisplayKey = ActionHelper.GetPooledText(action.DisplayText);
                 string fullTextForLog = "";
 
                 // If an emote was performed and there is text to display, wait a moment for a more natural flow.
@@ -119,35 +117,12 @@ namespace InteractiveEmotes
                     await Task.Delay(1200);
                 }
 
-                // --- Logic for displaying text, with support for splitting long messages ---
                 if (textToDisplayKey != null && character is NPC npcForText)
                 {
-                    string translatedText = _i18n.Get(textToDisplayKey);
-
-                    if (translatedText.Contains("|"))
-                    {
-                        string[] parts = translatedText.Split('|');
-                        for (int i = 0; i < parts.Length; i++)
-                        {
-                            string part = parts[i];
-                            string parsedPart = ParseTokens(part, npcForText);
-                            npcForText.showTextAboveHead(parsedPart);
-                            fullTextForLog += parsedPart + " ";
-
-                            if (i < parts.Length - 1)
-                            {
-                                await Task.Delay(1800);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        string parsedText = ParseTokens(translatedText, npcForText);
-                        npcForText.showTextAboveHead(parsedText);
-                        fullTextForLog = parsedText;
-                    }
+                    // ShowTextAsync handles both single and multi-part (|) messages.
+                    await ActionHelper.ShowTextAsync(textToDisplayKey, npcForText, _i18n);
+                    fullTextForLog = _i18n.Get(textToDisplayKey); // for log only
                 }
-                // --- End of text display logic ---
 
                 var logBuilder = new StringBuilder();
                 logBuilder.Append($"Emote Combo -> Character: {character.Name}");
@@ -155,6 +130,10 @@ namespace InteractiveEmotes
                 if (!string.IsNullOrEmpty(fullTextForLog)) logBuilder.Append($", Text: \"{fullTextForLog.Trim()}\"");
 
                 _monitor.Log(logBuilder.ToString(), LogLevel.Trace);
+            }
+            catch (Exception ex)
+            {
+                _monitor.Log($"Unhandled error in ExecuteComboAction for '{character.Name}': {ex.Message}", LogLevel.Error);
             }
             finally
             {
@@ -176,44 +155,6 @@ namespace InteractiveEmotes
                 playerState[character.Name] = npcState;
             }
             return npcState;
-        }
-
-        /// <summary>A helper method to get a single string from an object that can be either a string or an array of strings.</summary>
-        private string? GetRandomEmote(object? emoteObject)
-        {
-            if (emoteObject is null) return null;
-            if (emoteObject is string emoteString) return emoteString;
-            if (emoteObject is JArray jArray)
-            {
-                var emoteOptions = jArray.ToObject<List<string>>();
-                if (emoteOptions?.Count > 0)
-                {
-                    return emoteOptions[_random.Next(emoteOptions.Count)];
-                }
-            }
-            return null;
-        }
-
-        /// <summary>Parses dialogue tokens like @ and %spouse% from a string.</summary>
-        private string ParseTokens(string text, NPC speaker)
-        {
-            if (text.Contains('^'))
-            {
-                string[] parts = text.Split('^');
-                text = parts.Length >= 2 && !Game1.player.IsMale ? parts[1] : parts[0];
-            }
-            text = text.Replace("@", Game1.player.Name);
-            text = text.Replace("%farm", Game1.player.farmName.Value);
-            text = text.Replace("%favorite_thing", Game1.player.favoriteThing.Value);
-            if (Game1.player.hasPet())
-            {
-                text = text.Replace("%pet", Game1.player.getPetName());
-            }
-            if (speaker.getSpouse() != null)
-            {
-                text = text.Replace("%spouse", speaker.getSpouse().displayName);
-            }
-            return text;
         }
     }
 

@@ -12,6 +12,7 @@
 
 # Visual Studio cache/options
 .vs/
+.vscode/
 
 # ReSharper
 _ReSharper*/
@@ -23,3 +24,14 @@ _ReSharper*/
 **/packages/*
 *.nuget.props
 *.nuget.targets
+
+# stardew-mcp build outputs
+stardew-mcp/mcp-server/stardew-mcp
+stardew-mcp/mcp-server/stardew-mcp.exe
+stardew-mcp/
+
+Mods/**
+InteractiveEmotes/Mods/**
+
+.codegraph/**
+.gitmodules
