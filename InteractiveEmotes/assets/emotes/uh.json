@@ -1,0 +1,154 @@
+{
+  "Reactions": [
+    {
+      "Conditions": null,
+      "Action": {
+        "Emote": "pause"
+      }
+    }
+  ],
+  "ComboReactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Dog",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "pause",
+        "DisplayText": [
+          "animal.dog.happy1",
+          "animal.dog.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Cat",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "pause",
+        "DisplayText": [
+          "animal.cat.happy1",
+          "animal.cat.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Turtle",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "pause",
+        "DisplayText": [
+          "animal.turtle.happy1",
+          "animal.turtle.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": "Baby",
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "pause",
+        "DisplayText": [
+          "npc.baby.happy1",
+          "npc.baby.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Horse",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "pause",
+        "DisplayText": [
+          "animal.horse.happy1",
+          "animal.horse.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "Baby",
+          "Pet",
+          "FarmAnimal"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 5,
+      "Action": {
+        "Emote": [
+          "question",
+          "pause"
+        ],
+        "DisplayText": null
+      }
+    },
+    {
+      "Conditions": null,
+      "TriggerCount": 3,
+      "Action": {
+        "Emote": "question",
+        "DisplayText": [
+          "combo.npc.new.manyUh1",
+          "combo.npc.new.manyUh2",
+          "combo.npc.new.manyUh3"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "Reactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "Baby",
+          "Pet",
+          "FarmAnimal"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "heart"
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 2500,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "heart"
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 2000,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "blush"
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 1000,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "happy"
+      }
+    },
+    {
+      "Conditions": null,
+      "Action": {
+        "Emote": "question"
+      }
+    }
+  ],
+  "ComboReactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Dog",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "heart",
+        "DisplayText": [
+          "animal.dog.happy1",
+          "animal.dog.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Cat",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "heart",
+        "DisplayText": [
+          "animal.cat.happy1",
+          "animal.cat.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Turtle",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "heart",
+        "DisplayText": [
+          "animal.turtle.happy1",
+          "animal.turtle.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": "Baby",
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "heart",
+        "DisplayText": [
+          "npc.baby.happy1",
+          "npc.baby.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Horse",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "heart",
+        "DisplayText": [
+          "animal.horse.happy1",
+          "animal.horse.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "FarmAnimal"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "heart",
+        "DisplayText": null
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": true,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 3,
+      "Action": {
+        "Emote": [
+          "blush",
+          "heart"
+        ],
+        "DisplayText": [
+          "combo.npc.manylove.withlover",
+          "combo.npc.manylove.withlover2",
+          "combo.npc.manylove.withlover3"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": true,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 2000,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 3,
+      "Action": {
+        "Emote": [
+          "blush",
+          "blush",
+          "heart"
+        ],
+        "DisplayText": [
+          "combo.npc.manylove.withlover",
+          "combo.npc.manylove.withlover2",
+          "combo.npc.manylove.withlover3"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 1500,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "happy",
+        "DisplayText": [
+          "combo.npc.withnotlover.enoughfriendship",
+          "combo.npc.withnotlover.enoughfriendship2",
+          "combo.npc.withnotlover.enoughfriendship3"
+        ]
+      }
+    },
+    {
+      "Conditions": null,
+      "TriggerCount": 2,
+      "Action": {
+        "Emote": "question",
+        "DisplayText": [
+          "combo.npc.manylove.withnotlover.lowerfriendship",
+          "combo.npc.manylove.withnotlover2",
+          "combo.npc.manylove.withnotlover3"
+        ]
+      }
+    }
+  ]
+}

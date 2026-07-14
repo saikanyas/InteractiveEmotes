@@ -25,6 +25,11 @@ namespace InteractiveEmotes
             commandHelper.Add("emote_force", 
                 "Forces an NPC to perform a specific emote (useful for testing animations).\n\nUsage: emote_force <npc_name> <emote_name>\nExample: emote_force Abigail anim_sick", 
                 ForceEmoteCommand);
+
+            // Command: emote_bag
+            commandHelper.Add("emote_bag", 
+                "Shows the current state of the Shuffle Bag (text pools).\n\nUsage: emote_bag", 
+                BagStateCommand);
         }
 
         private static void ReloadRulesCommand(string command, string[] args)
@@ -107,6 +112,32 @@ namespace InteractiveEmotes
                 {
                     ModEntry.Instance.Monitor.Log($"Unknown emote '{emoteName}'.", LogLevel.Warn);
                 }
+            }
+        }
+
+        private static void BagStateCommand(string command, string[] args)
+        {
+            ModEntry.Instance.Monitor.Log("--- Current Shuffle Bag State ---", LogLevel.Info);
+            
+            if (EmoteReactionHandler._textPools.Count == 0)
+            {
+                ModEntry.Instance.Monitor.Log("No pools created yet.", LogLevel.Info);
+                return;
+            }
+
+            foreach (var kvp in EmoteReactionHandler._textPools)
+            {
+                string poolKey = kvp.Key;
+                var queue = kvp.Value;
+                
+                EmoteReactionHandler._lastTextShown.TryGetValue(poolKey, out string? lastText);
+                string lastTextStr = lastText ?? "None";
+
+                ModEntry.Instance.Monitor.Log($"Pool: {poolKey}", LogLevel.Info);
+                ModEntry.Instance.Monitor.Log($"  Remaining Items: {queue.Count}", LogLevel.Info);
+                ModEntry.Instance.Monitor.Log($"  Contents: [{string.Join(", ", queue)}]", LogLevel.Info);
+                ModEntry.Instance.Monitor.Log($"  Last Drawn: {lastTextStr}", LogLevel.Info);
+                ModEntry.Instance.Monitor.Log("--------------------------------", LogLevel.Info);
             }
         }
     }

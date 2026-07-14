@@ -1,0 +1,170 @@
+{
+  "Reactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "Baby",
+          "Pet",
+          "FarmAnimal"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "happy"
+      }
+    },
+    {
+      "Conditions": null,
+      "Action": {
+        "Emote": "sleep"
+      }
+    }
+  ],
+  "ComboReactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Dog",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sleep",
+        "DisplayText": [
+          "animal.dog.happy1",
+          "animal.dog.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Cat",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sleep",
+        "DisplayText": [
+          "animal.cat.happy1",
+          "animal.cat.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Turtle",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sleep",
+        "DisplayText": [
+          "animal.turtle.happy1",
+          "animal.turtle.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": "Baby",
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sleep",
+        "DisplayText": [
+          "npc.baby.happy1",
+          "npc.baby.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Horse",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sleep",
+        "DisplayText": [
+          "animal.horse.happy1",
+          "animal.horse.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "Baby",
+          "Pet",
+          "FarmAnimal"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sleep",
+        "DisplayText": null
+      }
+    },
+    {
+      "Conditions": null,
+      "TriggerCount": 3,
+      "Action": {
+        "Emote": "sleep",
+        "DisplayText": [
+          "combo.npc.manySleep",
+          "combo.npc.manySleep2"
+        ]
+      }
+    }
+  ]
+}

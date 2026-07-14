@@ -1,0 +1,71 @@
+{
+  "Reactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "Pet",
+          "FarmAnimal"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "question"
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": "Baby",
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "sad"
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 1000,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "question",
+        "DisplayText": [
+          "reaction.npc.angry.friend1",
+          "reaction.npc.angry.friend2"
+        ]
+      }
+    },
+    {
+      "Conditions": null,
+      "Action": {
+        "Emote": "angry",
+        "DisplayText": [
+          "reaction.npc.angry.default",
+          "combo.npc.manyAngry",
+          "reaction.npc.angry.default"
+        ]
+      }
+    }
+  ],
+  "ComboReactions": []
+}

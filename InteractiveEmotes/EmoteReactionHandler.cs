@@ -24,7 +24,7 @@ namespace InteractiveEmotes
         // When Queue is empty → refilled and reshuffled (loops)
         // Resets when session ends (since it's only kept in memory)
         // ============================================================
-        private static readonly Dictionary<string, Queue<string>> _textPools = new Dictionary<string, Queue<string>>();
+        internal static readonly Dictionary<string, Queue<string>> _textPools = new Dictionary<string, Queue<string>>();
 
         // ============================================================
         // HandleReaction — Entry point for reactions
@@ -50,15 +50,31 @@ namespace InteractiveEmotes
                 return;
             }
 
-            int index = 0;
+            // Shuffle the NPCs so they don't react in the exact same order every time
+            List<NPC> shuffledNpcs = new List<NPC>(npcs);
+            for (int i = shuffledNpcs.Count - 1; i > 0; i--)
+            {
+                int j = _random.Next(i + 1);
+                NPC temp = shuffledNpcs[i];
+                shuffledNpcs[i] = shuffledNpcs[j];
+                shuffledNpcs[j] = temp;
+            }
 
-            foreach (NPC npc in npcs)                         // Loop from List<NPC> directly
+            // First NPC delay
+            int currentDelay = ModEntry.Instance.Config.EmoteDelay + _random.Next(-200, 201);
+            bool isFirstReactor = true;
+
+            foreach (NPC npc in shuffledNpcs)
             {
                 // Always check Combo first. If triggered → skip immediate reaction for this NPC
                 if (emoteData.ComboReactions.Count > 0 &&
                     ComboHandler.ProcessCombo(player, npc, emoteString, emoteData.ComboReactions, ModEntry.Instance.Config, ruleProcessor, i18n))
                 {
-                    index++;
+                    if (!isFirstReactor)
+                    {
+                        currentDelay += _random.Next(1, 201);
+                    }
+                    isFirstReactor = false;
                     continue;
                 }
 
@@ -70,25 +86,29 @@ namespace InteractiveEmotes
                     continue;
                 }
 
-                int delay = index * ModEntry.Instance.Config.EmoteDelay;
-
-                if (delay == 0)
+                // If not first, add sequential fixed random delay between 1-200ms
+                if (!isFirstReactor)
                 {
-                    ReactToNpc(npc, matchingRule, player, emoteNameToId, i18n);
+                    currentDelay += _random.Next(1, 201);
+                }
+                isFirstReactor = false;
+
+                NPC capturedNpc = npc;
+                ReactionRule capturedRule = matchingRule;
+                Farmer capturedPlayer = player;
+                int capturedDelay = currentDelay;
+
+                if (capturedDelay <= 0)
+                {
+                    ReactToNpc(capturedNpc, capturedRule, capturedPlayer, emoteNameToId, i18n);
                 }
                 else
                 {
-                    NPC capturedNpc = npc;
-                    ReactionRule capturedRule = matchingRule;
-                    Farmer capturedPlayer = player;
-
                     DelayedAction.functionAfterDelay(
                         () => ReactToNpc(capturedNpc, capturedRule, capturedPlayer, emoteNameToId, i18n),
-                        delay
+                        capturedDelay
                     );
                 }
-
-                index++;
             }
         }
 
@@ -225,34 +245,47 @@ namespace InteractiveEmotes
         // Pool Management — Shuffle Bag
         // ============================================================
 
+        // Keeps track of the last text shown for each pool to prevent back-to-back repeats on refill
+        internal static readonly Dictionary<string, string> _lastTextShown = new Dictionary<string, string>();
+
         /// <summary>Draws 1 string from the Pool.
         /// If Pool is empty or missing → creates and shuffles a new one</summary>
         private static string DrawFromPool(string poolKey, List<string> allOptions)
         {
-            // If no Pool exists for this key, or Pool is empty → create new
             if (!_textPools.ContainsKey(poolKey) || _textPools[poolKey].Count == 0)
             {
-                _textPools[poolKey] = CreateShuffledQueue(allOptions);
+                _textPools[poolKey] = CreateShuffledQueue(allOptions, poolKey);
             }
 
-            // Draw from the front of the queue (FIFO)
-            return _textPools[poolKey].Dequeue();
+            string drawnText = _textPools[poolKey].Dequeue();
+            _lastTextShown[poolKey] = drawnText;
+            return drawnText;
         }
 
         /// <summary>Copies the list, randomizes order using Fisher-Yates Shuffle,
         /// and enqueues it for FIFO retrieval.</summary>
-        private static Queue<string> CreateShuffledQueue(List<string> options)
+        private static Queue<string> CreateShuffledQueue(List<string> options, string poolKey)
         {
-            // Copy first to avoid modifying the original list
             List<string> shuffled = new List<string>(options);
 
-            // Fisher-Yates Shuffle: Random swap from back to front
             for (int i = shuffled.Count - 1; i > 0; i--)
             {
                 int j = _random.Next(i + 1);
                 string temp = shuffled[i];
                 shuffled[i] = shuffled[j];
                 shuffled[j] = temp;
+            }
+
+            // Prevent back-to-back repeats across pool refills
+            if (shuffled.Count > 1 && _lastTextShown.TryGetValue(poolKey, out string? lastText))
+            {
+                if (shuffled[0] == lastText)
+                {
+                    // Swap the first item with the second item
+                    string temp = shuffled[0];
+                    shuffled[0] = shuffled[1];
+                    shuffled[1] = temp;
+                }
             }
 
             return new Queue<string>(shuffled);
@@ -399,7 +432,7 @@ namespace InteractiveEmotes
                 // If translation file is missing, it returns the key (or contains key format)
                 if (translatedMsg == msgKey || translatedMsg.Contains("message.friendship"))
                 {
-                    translatedMsg = $"+{gainAmount} Friendship with {npc.displayName}";
+                    translatedMsg = $"{npc.displayName} +{gainAmount}";
                 }
 
                 Game1.addHUDMessage(new HUDMessage(translatedMsg, HUDMessage.newQuest_type));

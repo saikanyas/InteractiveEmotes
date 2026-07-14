@@ -1,0 +1,272 @@
+{
+  "Reactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "Baby",
+          "Pet",
+          "FarmAnimal"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "question"
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 1000,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "sad"
+      }
+    },
+    {
+      "Conditions": null,
+      "Action": {
+        "Emote": "question"
+      }
+    }
+  ],
+  "ComboReactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Dog",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sad",
+        "DisplayText": [
+          "animal.dog.happy1",
+          "animal.dog.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Cat",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sad",
+        "DisplayText": [
+          "animal.cat.happy1",
+          "animal.cat.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Turtle",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sad",
+        "DisplayText": [
+          "animal.turtle.happy1",
+          "animal.turtle.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": "Baby",
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sad",
+        "DisplayText": [
+          "npc.baby.happy1",
+          "npc.baby.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": "Horse",
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": "sad",
+        "DisplayText": [
+          "animal.horse.happy1",
+          "animal.horse.happy2"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "Baby",
+          "Pet",
+          "FarmAnimal"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 3,
+      "Action": {
+        "Emote": [
+          "sad",
+          "question",
+          "question"
+        ],
+        "DisplayText": null
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": true,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 2000,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 3,
+      "Action": {
+        "Emote": [
+          "sad",
+          "sad",
+          "question"
+        ],
+        "DisplayText": [
+          "reaction.npc.sad.spouse1",
+          "reaction.npc.sad.spouse2",
+          "reaction.npc.sad.spouse3"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": true,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 2000,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 3,
+      "Action": {
+        "Emote": [
+          "sad",
+          "sad",
+          "question"
+        ],
+        "DisplayText": [
+          "reaction.npc.sad.spouse1",
+          "reaction.npc.sad.spouse2",
+          "reaction.npc.sad.spouse3"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 1500,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "TriggerCount": 3,
+      "Action": {
+        "Emote": [
+          "sad",
+          "sad",
+          "question"
+        ],
+        "DisplayText": [
+          "reaction.npc.sad.friend1",
+          "reaction.npc.sad.friend2",
+          "reaction.npc.sad.friend3"
+        ]
+      }
+    },
+    {
+      "Conditions": null,
+      "TriggerCount": 4,
+      "Action": {
+        "Emote": [
+          "sad",
+          "question",
+          "question"
+        ],
+        "DisplayText": [
+          "combo.npc.manySad",
+          "combo.npc.manySad2"
+        ]
+      }
+    }
+  ]
+}

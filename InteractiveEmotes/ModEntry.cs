@@ -86,46 +86,101 @@ namespace InteractiveEmotes
             ComboHandler.ClearAllStates();
         }
 
-        // Load Rule data from reactions.json and combos.json and merge into _reactionRules
-        // Internal access to allow ConsoleCommandHandler to reload rules
-        internal void LoadReactionRules()
+        private void MigrateOldJsonFiles()
         {
-            // --- Load reactions.json ---
-            var reactions = this.Helper.Data.ReadJsonFile<Dictionary<string, EmoteReactionData>>("assets/reactions.json");
-
-            if (reactions == null)
+            string emotesDirPath = System.IO.Path.Combine(this.Helper.DirectoryPath, "assets", "emotes");
+            
+            // If the emotes folder already exists, migration has already happened or user created it manually.
+            if (System.IO.Directory.Exists(emotesDirPath))
             {
-                this.Monitor.Log("Could not load assets/reactions.json — no reactions will trigger.", LogLevel.Warn);
-                reactions = new Dictionary<string, EmoteReactionData>();
+                return;
             }
 
-            _reactionRules = reactions;
+            System.IO.Directory.CreateDirectory(emotesDirPath);
+            this.Monitor.Log("Created assets/emotes/ directory for the new folder-based config structure.", LogLevel.Info);
 
-            // --- Load combos.json and merge ComboReactions into _reactionRules ---
-            // combos.json has the same structure as reactions.json,
-            // but uses the key "ComboReactions" instead of "Reactions"
-            var combos = this.Helper.Data.ReadJsonFile<Dictionary<string, EmoteReactionData>>("assets/combos.json");
-
-            if (combos == null)
+            var oldReactions = this.Helper.Data.ReadJsonFile<Dictionary<string, EmoteReactionData>>("assets/reactions.json");
+            var oldCombos = this.Helper.Data.ReadJsonFile<Dictionary<string, EmoteReactionData>>("assets/combos.json");
+            
+            if (oldReactions == null && oldCombos == null)
             {
-                this.Monitor.Log("Could not load assets/combos.json — combos will not work.", LogLevel.Warn);
+                return; // Nothing to migrate
             }
-            else
+
+            var mergedData = new Dictionary<string, EmoteReactionData>();
+
+            if (oldReactions != null)
             {
-                foreach (var entry in combos)
+                foreach (var kvp in oldReactions)
                 {
-                    // If this key doesn't exist in _reactionRules yet, create it
-                    if (!_reactionRules.ContainsKey(entry.Key))
-                    {
-                        _reactionRules[entry.Key] = new EmoteReactionData();
-                    }
-
-                    // Copy ComboReactions from combos.json into the existing EmoteReactionData
-                    _reactionRules[entry.Key].ComboReactions = entry.Value.ComboReactions;
+                    mergedData[kvp.Key] = kvp.Value;
                 }
             }
 
-            this.Monitor.Log($"Loaded rules for {_reactionRules.Count} emotes (reactions + combos).", LogLevel.Debug);
+            if (oldCombos != null)
+            {
+                foreach (var kvp in oldCombos)
+                {
+                    if (!mergedData.ContainsKey(kvp.Key))
+                    {
+                        mergedData[kvp.Key] = new EmoteReactionData();
+                    }
+                    mergedData[kvp.Key].ComboReactions = kvp.Value.ComboReactions;
+                }
+            }
+
+            // Write each merged entry to its own file in assets/emotes/
+            foreach (var kvp in mergedData)
+            {
+                // WriteJsonFile saves relative to the mod folder
+                this.Helper.Data.WriteJsonFile($"assets/emotes/{kvp.Key}.json", kvp.Value);
+            }
+
+            this.Monitor.Log($"Successfully migrated {mergedData.Count} emotes into individual files inside assets/emotes/.", LogLevel.Info);
+
+            // Rename old files to .bak
+            string oldReactionsPath = System.IO.Path.Combine(this.Helper.DirectoryPath, "assets", "reactions.json");
+            if (System.IO.File.Exists(oldReactionsPath))
+            {
+                System.IO.File.Move(oldReactionsPath, oldReactionsPath + ".bak");
+            }
+
+            string oldCombosPath = System.IO.Path.Combine(this.Helper.DirectoryPath, "assets", "combos.json");
+            if (System.IO.File.Exists(oldCombosPath))
+            {
+                System.IO.File.Move(oldCombosPath, oldCombosPath + ".bak");
+            }
+        }
+
+        // Load Rule data from assets/emotes/*.json
+        // Internal access to allow ConsoleCommandHandler to reload rules
+        internal void LoadReactionRules()
+        {
+            MigrateOldJsonFiles();
+
+            _reactionRules.Clear();
+            string emotesDirPath = System.IO.Path.Combine(this.Helper.DirectoryPath, "assets", "emotes");
+            
+            if (!System.IO.Directory.Exists(emotesDirPath))
+            {
+                this.Monitor.Log("assets/emotes directory not found. No reactions will trigger.", LogLevel.Warn);
+                return;
+            }
+
+            string[] files = System.IO.Directory.GetFiles(emotesDirPath, "*.json");
+
+            foreach (string file in files)
+            {
+                string fileName = System.IO.Path.GetFileNameWithoutExtension(file);
+                var emoteData = this.Helper.Data.ReadJsonFile<EmoteReactionData>($"assets/emotes/{System.IO.Path.GetFileName(file)}");
+
+                if (emoteData != null)
+                {
+                    _reactionRules[fileName] = emoteData;
+                }
+            }
+
+            this.Monitor.Log($"Loaded rules for {_reactionRules.Count} emotes from assets/emotes/.", LogLevel.Debug);
         }
 
 

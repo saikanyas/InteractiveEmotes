@@ -7,8 +7,7 @@ This guide provides a comprehensive, step-by-step tutorial on how to customize e
 Before you begin, it's highly recommended to use a code editor like **Visual Studio Code (VS Code)**. It's free and will provide syntax highlighting, error checking, and code formatting, which makes editing JSON files much easier.
 
 You can find the customization files in your game's directory:
-* `Mods/InteractiveEmotes/assets/reactions.json`
-* `Mods/InteractiveEmotes/assets/combos.json`
+* `Mods/InteractiveEmotes/assets/emotes/` (This folder contains individual `.json` files for each emote)
 * `Mods/InteractiveEmotes/i18n/default.json` (for English dialogue)
 
 ---
@@ -17,21 +16,22 @@ You can find the customization files in your game's directory:
 
 The entire system is built on three core concepts:
 
-* **Emotes:** The top level of the JSON files is the name of the player's emote (e.g., `"heart"`). This is the trigger. You can create rules for any of the game's standard emotes.
-* **Rules:** Inside each emote is a list of rules (`"Reactions": []` or `"ComboReactions": []`). The mod checks these rules **from top to bottom** and uses the **first rule that matches** the current situation. This is the most important principle to remember.
+* **Emotes:** Each emote has its own dedicated file inside the `assets/emotes/` folder (e.g., `heart.json`). The name of the file is the trigger. You can create rules for any of the game's standard emotes by creating a file with that emote's name.
+* **Rules:** Inside each file is a list of rules (`"Reactions": []` and `"ComboReactions": []`). The mod checks these rules **from top to bottom** and uses the **first rule that matches** the current situation. This is the most important principle to remember.
 * **Actions:** Every rule must have an `Action` that tells the character what to do (show an emote, display text, or both).
 
 ---
 
 ## **2. Your First Custom Reaction (Step-by-Step)**
 
-Let's create a set of reactions for the **`"hi"`** emote in `reactions.json`.
+Let's create a set of reactions for the **`hi`** emote. We will create or edit the file `assets/emotes/hi.json`.
 
 ### **Step 2.1: The Simplest Rule (A Catch-All)**
 A "catch-all" rule has no conditions and will trigger if no other specific rule matches. It's great as a default fallback.
 
+**In `hi.json`:**
 ```json
-"hi": {
+{
   "Reactions": [
     {
       "Action": {
@@ -46,9 +46,9 @@ A "catch-all" rule has no conditions and will trigger if no other specific rule 
 ### **Step 2.2: Adding Dialogue**
 Let's make them say something. We do this by adding a `DisplayText` key. The value is a "translation key" that links to your dialogue file.
 
-**In `reactions.json`:**
+**In `hi.json`:**
 ```json
-"hi": {
+{
   "Reactions": [
     {
       "Action": {
@@ -72,9 +72,9 @@ You must add the corresponding key and the text you want to show.
 ### **Step 2.3: Adding Randomness**
 To make interactions feel less repetitive, you can provide a list of options for `Emote` and `DisplayText`. The mod will pick one at random each time.
 
-**In `reactions.json`:**
+**In `hi.json`:**
 ```json
-"hi": {
+{
   "Reactions": [
     {
       "Action": {
@@ -223,15 +223,16 @@ The mod checks rules from top to bottom. This means you **must** place your most
 
 #### **Incorrect Order ❌**
 This will not work as intended. The first rule (the general one) will always be chosen, and the specific rule for friends will never be reached.
+**In `heart.json`:**
 ```json
-"heart": {
+{
   "Reactions": [
     {
-      "Action": "question" // General rule is first
+      "Action": { "Emote": "question" } // General rule is first
     },
     {
       "Conditions": { "FriendshipGreaterThanOrEqualTo": 2000 }, // Specific rule is second
-      "Action": "heart"
+      "Action": { "Emote": "heart" }
     }
   ]
 }
@@ -239,15 +240,16 @@ This will not work as intended. The first rule (the general one) will always be 
 
 #### **Correct Order ✅**
 The specific rule for high friendship is placed first. If that condition isn't met, the mod will then fall back to the general rule below it.
+**In `heart.json`:**
 ```json
-"heart": {
+{
   "Reactions": [
     {
       "Conditions": { "FriendshipGreaterThanOrEqualTo": 2000 }, // Specific rule is first
-      "Action": "heart"
+      "Action": { "Emote": "heart" }
     },
     {
-      "Action": "question" // General rule is the fallback
+      "Action": { "Emote": "question" } // General rule is the fallback
     }
   ]
 }
@@ -255,15 +257,15 @@ The specific rule for high friendship is placed first. If that condition isn't m
 
 ---
 
-## **5. Understanding Combos (`combos.json`)**
+## **5. Understanding Combos (`ComboReactions`)**
 
-The `combos.json` file works exactly like `reactions.json`, but with one extra key:
+The `ComboReactions` list works exactly like `Reactions`, but is placed alongside it in the same file. It requires one extra key:
 
 * **`TriggerCount`**: An `integer` that specifies how many times you must perform the emote in a row to trigger the combo reaction.
 
-**Example Combo Rule:**
+**Example Combo Rule (in `happy.json`):**
 ```json
-"happy": {
+{
   "ComboReactions": [
     {
       "Conditions": { "FriendshipGreaterThanOrEqualTo": 1000 },

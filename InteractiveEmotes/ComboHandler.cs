@@ -121,6 +121,11 @@ namespace InteractiveEmotes
 
             DelayedAction.functionAfterDelay(() =>
             {
+                if (config.PlayReplySound)
+                {
+                    Game1.playSound("yoba");
+                }
+
                 bool didSomething = false;
 
                 // --- Play Emote or Animation ---

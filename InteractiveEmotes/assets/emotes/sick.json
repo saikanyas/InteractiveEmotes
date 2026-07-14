@@ -1,0 +1,77 @@
+{
+  "Reactions": [
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": [
+          "Baby",
+          "FarmAnimal",
+          "Pet"
+        ],
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "exclamation"
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": true,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": null,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "exclamation",
+        "DisplayText": [
+          "reaction.npc.sick.spouse1",
+          "reaction.npc.sick.spouse2",
+          "reaction.npc.sick.spouse3"
+        ]
+      }
+    },
+    {
+      "Conditions": {
+        "Name": null,
+        "IsSpouse": null,
+        "IsDateable": null,
+        "CharacterType": null,
+        "PetType": null,
+        "FriendshipGreaterThanOrEqualTo": 1000,
+        "FriendshipLessThan": null,
+        "Season": null,
+        "Weather": null
+      },
+      "Action": {
+        "Emote": "sad",
+        "DisplayText": [
+          "reaction.npc.sick.friend1",
+          "reaction.npc.sick.friend2",
+          "reaction.npc.sick.friend3"
+        ]
+      }
+    },
+    {
+      "Conditions": null,
+      "Action": {
+        "Emote": "question",
+        "DisplayText": [
+          "reaction.npc.sick.default1",
+          "reaction.npc.sick.default2"
+        ]
+      }
+    }
+  ],
+  "ComboReactions": []
+}

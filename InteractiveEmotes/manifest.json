@@ -1,7 +1,7 @@
 ﻿{
   "Name": "Interactive Emotes",
   "Author": "saikanyass",
-  "Version": "2.0.0",
+  "Version": "2.1.0",
   "Description": "An emote interactive with NPC",
   "UniqueID": "saikanyass.InteractiveEmotes",
   "EntryDll": "InteractiveEmotes.dll",
