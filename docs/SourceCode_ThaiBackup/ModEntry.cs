@@ -16,14 +16,14 @@ namespace InteractiveEmotes
         public static ModEntry Instance { get; private set; } = null!;
         public ModConfig Config { get; private set; } = null!;
 
-        // Stores all Rules from reactions.json + combos.json
+        // เก็บ Rule ทั้งหมดจาก reactions.json + combos.json
         private static Dictionary<string, EmoteReactionData> _reactionRules = new();
 
-        // Rule condition checker — Created once and shared across the mod
+        // ตรวจเงื่อนไข Rule — สร้างครั้งเดียว ใช้ร่วมกันทั้ง mod
         internal static readonly RuleProcessor _ruleProcessor = new();
 
-        // emote name → emote ID mapping for doEmote()
-        // Created once on GameLaunched to avoid redundant looping every time an NPC reacts
+        // [เพิ่มใหม่] ชื่อ emote → emote ID ที่ใช้กับ doEmote()
+        // สร้างครั้งเดียวตอน GameLaunched เพื่อหลีกเลี่ยงการวนลูปซ้ำทุกครั้งที่ NPC ตอบสนอง
         internal static Dictionary<string, int> _emoteNameToId = new();
 
         public override void Entry(IModHelper helper)
@@ -41,7 +41,7 @@ namespace InteractiveEmotes
 
             LoadReactionRules();
 
-            // Create emote name→ID map and Setup GMCM on GameLaunched
+            // [เพิ่มใหม่] สร้าง emote name→ID map และ Setup GMCM ตอน GameLaunched
             helper.Events.GameLoop.GameLaunched += (_, _) =>
             {
                 foreach (var emote in Farmer.EMOTES)
@@ -52,11 +52,11 @@ namespace InteractiveEmotes
                     }
                 }
 
-                // Initialize the Generic Mod Config Menu
+                // เรียกใช้ GMCM ที่เขียนไว้ด้านล่างแต่ลืมเรียก
                 SetUpConfigMenu(this.Config, this.Helper.Translation);
             };
 
-            // Register Console Commands
+            // [เพิ่มใหม่] ลงทะเบียนคำสั่ง Console
             ConsoleCommandHandler.RegisterCommands(this.Helper.ConsoleCommands);
 
             helper.Events.GameLoop.DayStarted += OnDayStarted;
@@ -70,7 +70,7 @@ namespace InteractiveEmotes
             Instance.Monitor.Log($"Emote performed: {emote_string}", LogLevel.Trace);
             var player = __instance;
 
-            // ConditionGetter returns List<NPC> directly, preventing redundant lookups in HandleReaction
+            // ConditionGetter คืน List<NPC> โดยตรง ไม่ต้องค้นหาซ้ำใน HandleReaction
             var nearbyNpcs = ConditionGetter.GetNearbyNpcs(Instance.Config.EventDistance, player);
 
             EmoteReactionHandler.HandleReaction(nearbyNpcs, emote_string, _reactionRules, player, _ruleProcessor, _emoteNameToId, Instance.Helper.Translation);
@@ -82,15 +82,15 @@ namespace InteractiveEmotes
         private void OnDayStarted(object? sender, DayStartedEventArgs e)
         {
             EmoteReactionHandler.ClearDailyNpcLimits();
-            // Reset all combo states overnight
+            // [เพิ่มใหม่] reset combo state ทั้งหมดตอนข้ามวัน
             ComboHandler.ClearAllStates();
         }
 
-        // Load Rule data from reactions.json and combos.json and merge into _reactionRules
-        // Internal access to allow ConsoleCommandHandler to reload rules
+        // [เพิ่มใหม่] โหลดข้อมูล Rule จาก reactions.json และ combos.json แล้ว merge เข้า _reactionRules
+        // ปรับเป็น internal เพื่อให้ ConsoleCommandHandler เรียกใช้ได้ตอนพิมพ์ emote_reload
         internal void LoadReactionRules()
         {
-            // --- Load reactions.json ---
+            // --- โหลด reactions.json ---
             var reactions = this.Helper.Data.ReadJsonFile<Dictionary<string, EmoteReactionData>>("assets/reactions.json");
 
             if (reactions == null)
@@ -101,9 +101,9 @@ namespace InteractiveEmotes
 
             _reactionRules = reactions;
 
-            // --- Load combos.json and merge ComboReactions into _reactionRules ---
-            // combos.json has the same structure as reactions.json,
-            // but uses the key "ComboReactions" instead of "Reactions"
+            // --- โหลด combos.json แล้ว merge ComboReactions เข้า _reactionRules ---
+            // combos.json มีโครงสร้างเดียวกันกับ reactions.json
+            // แต่ใช้ key "ComboReactions" แทน "Reactions"
             var combos = this.Helper.Data.ReadJsonFile<Dictionary<string, EmoteReactionData>>("assets/combos.json");
 
             if (combos == null)
@@ -114,13 +114,13 @@ namespace InteractiveEmotes
             {
                 foreach (var entry in combos)
                 {
-                    // If this key doesn't exist in _reactionRules yet, create it
+                    // ถ้ายังไม่มี key นี้ใน _reactionRules ให้สร้างใหม่
                     if (!_reactionRules.ContainsKey(entry.Key))
                     {
                         _reactionRules[entry.Key] = new EmoteReactionData();
                     }
 
-                    // Copy ComboReactions from combos.json into the existing EmoteReactionData
+                    // copy ComboReactions จาก combos.json เข้าไปใน EmoteReactionData ที่มีอยู่
                     _reactionRules[entry.Key].ComboReactions = entry.Value.ComboReactions;
                 }
             }

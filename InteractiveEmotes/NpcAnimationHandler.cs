@@ -1,93 +1,97 @@
-﻿using StardewModdingAPI;
-using StardewValley;
 using System.Collections.Generic;
-using System.Linq;
+using StardewModdingAPI;
+using StardewValley;
 
 namespace InteractiveEmotes
 {
-    /// <summary>Handles the execution of complex, multi-frame body animations for NPCs.</summary>
-    public class NpcAnimationHandler
+    // ============================================================
+    // NpcAnimationHandler.cs — Handles special NPC animations
+    //
+    // Used when Emote in Action starts with "anim_"
+    // e.g. "anim_game", "anim_laugh", "anim_sick"
+    //
+    // Differs from normal doEmote() as it can play multiple frames
+    // continuously and restores the original animation state when done.
+    // ============================================================
+
+    public static class NpcAnimationHandler
     {
-        private readonly IMonitor _monitor;
-
-        public NpcAnimationHandler(IMonitor monitor)
+        /// <summary>Plays a special animation based on the provided name.
+        /// animName is the string after removing "anim_" prefix (e.g. "game", "laugh").</summary>
+        public static void PerformAnimation(NPC npc, string animName)
         {
-            _monitor = monitor;
-        }
+            ModEntry.Instance.Monitor.Log($"[NpcAnimation] {npc.Name} performing animation: {animName}", LogLevel.Trace);
 
-        /// <summary>Performs a predefined special animation on an NPC.</summary>
-        /// <param name="npc">The target NPC.</param>
-        /// <param name="animationName">The name of the animation to perform (e.g., "laugh").</param>
-        public void PerformAnimation(NPC npc, string animationName)
-        {
-            _monitor.Log($"Attempting to perform special animation '{animationName}' for {npc.Name}.", LogLevel.Debug);
-
+            // Pause movement temporarily for 600ms to let animation play
+            // The game will automatically restore the schedule after the timeout
             npc.Halt();
             npc.movementPause = 600;
 
-            switch (animationName.ToLower())
+            switch (animName.ToLower())
             {
                 case "sick":
+                    // NPC shakes slightly, then shows sad emote
                     npc.shake(500);
-                    npc.doEmote(28); // Sad emote
+                    npc.doEmote(28); // sad emote
                     break;
 
                 case "laugh":
-                    // A laughing animation that cycles between frames 4 and 5.
+                    // Alternate frames 4 and 5 to simulate laughing
+                    // Sequence: frame4 → frame5 → frame4 → frame5 → frame0 (normal)
                     PlayTemporaryAnimation(npc, new List<int> { 4, 5, 4, 5, 4, 0 }, 200);
                     break;
 
                 case "game":
+                    // NPC shakes slightly + coin sound + video game emote
                     npc.shake(200);
                     Game1.playSound("coin");
-                    npc.doEmote(52); // Video game emote
+                    npc.doEmote(52); // video game emote
                     break;
 
                 case "exclamation":
+                    // NPC shakes, then shows exclamation emote
                     npc.shake(300);
-                    npc.doEmote(16); // Exclamation emote
+                    npc.doEmote(16); // exclamation emote
                     break;
 
                 default:
-                    _monitor.Log($"Unknown animation name: {animationName}", LogLevel.Warn);
+                    ModEntry.Instance.Monitor.Log($"[NpcAnimation] Unknown animation name: '{animName}'", LogLevel.Warn);
                     break;
             }
         }
 
-        /// <summary>A helper method to play a temporary sequence of animation frames on an NPC, then restore their original state.</summary>
-        /// <param name="npc">The target NPC.</param>
-        /// <param name="frameIndices">A list of sprite frame indices to play in sequence.</param>
-        /// <param name="interval">The duration in milliseconds for each frame.</param>
-        /// <param name="holdLastFrame">Whether to hold the last frame of the animation instead of reverting.</param>
-        private void PlayTemporaryAnimation(NPC npc, List<int> frameIndices, int interval, bool holdLastFrame = false)
+        /// <summary>Plays a temporary animation from a list of frame indices.
+        /// Will restore the original animation state after finishing.</summary>
+        /// <param name="npc">NPC performing the animation</param>
+        /// <param name="frameIndices">List of frame indices to play in order</param>
+        /// <param name="intervalMs">Duration of each frame in milliseconds</param>
+        private static void PlayTemporaryAnimation(NPC npc, List<int> frameIndices, int intervalMs)
         {
-            // 1. Store the NPC's original animation state.
+            // Save original animation state to restore later
             var originalAnimation = npc.Sprite.CurrentAnimation;
             int originalFrame = npc.Sprite.currentFrame;
 
-            // 2. Create a new animation sequence from the provided frame indices.
-            var newAnimationFrames = new List<FarmerSprite.AnimationFrame>();
+            // Create new animation from the provided frame indices
+            var newFrames = new List<FarmerSprite.AnimationFrame>();
             foreach (int frame in frameIndices)
             {
-                newAnimationFrames.Add(new FarmerSprite.AnimationFrame(frame, interval));
+                newFrames.Add(new FarmerSprite.AnimationFrame(frame, intervalMs));
             }
 
-            int totalDuration = newAnimationFrames.Sum(f => f.milliseconds);
+            // Calculate total duration of the animation
+            int totalDuration = frameIndices.Count * intervalMs;
 
-            // 3. Play the new animation immediately.
-            npc.Sprite.setCurrentAnimation(newAnimationFrames);
+            // Start playing the animation immediately
+            npc.Sprite.setCurrentAnimation(newFrames);
 
-            // 4. Schedule an action to restore the original animation after the new one completes.
+            // After completion: restore the NPC's original state
             DelayedAction.functionAfterDelay(() =>
             {
-                // Ensure the NPC still exists in the location before modifying them.
+                // Ensure NPC is still in the location before modifying
                 if (npc != null && npc.currentLocation != null)
                 {
-                    if (!holdLastFrame)
-                    {
-                        npc.Sprite.CurrentAnimation = originalAnimation;
-                        npc.Sprite.currentFrame = originalFrame;
-                    }
+                    npc.Sprite.CurrentAnimation = originalAnimation;
+                    npc.Sprite.currentFrame = originalFrame;
                     npc.Sprite.StopAnimation();
                 }
             }, totalDuration);

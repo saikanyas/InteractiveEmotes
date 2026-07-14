@@ -7,18 +7,18 @@ using StardewValley.Characters;
 namespace InteractiveEmotes
 {
     // ============================================================
-    // RuleProcessor.cs — Checks conditions for Rules
+    // RuleProcessor.cs — ตรวจเงื่อนไข Rule
     //
-    // Single responsibility: Receives List<ReactionRule> + character + farmer
-    // and returns the first Rule that passes all conditions
+    // หน้าที่เดียว: รับ List<ReactionRule> + ตัวละคร + farmer
+    // แล้วคืน Rule แรกที่เงื่อนไขผ่านครบ
     //
-    // JSON loading has been moved to ModEntry.cs
+    // การโหลด JSON ย้ายไปอยู่ที่ ModEntry.cs แล้ว
     // ============================================================
 
     public class RuleProcessor
     {
-        /// <summary>Finds the first Rule that meets all conditions.
-        /// Returns null if no Rule matches.</summary>
+        /// <summary>วนหา Rule แรกที่เงื่อนไขผ่านครบ
+        /// คืน null ถ้าไม่มี Rule ใดผ่าน</summary>
         public ReactionRule? FindMatchingRule(List<ReactionRule> rules, Farmer farmer, Character character, ModConfig config)
         {
             foreach (ReactionRule rule in rules)
@@ -32,23 +32,23 @@ namespace InteractiveEmotes
         }
 
         // ============================================================
-        // Condition Checks
+        // ตรวจเงื่อนไข
         // ============================================================
 
         private bool AreConditionsMet(Condition? conditions, Farmer farmer, Character character, ModConfig config)
         {
-            // null = no conditions, always passes (Default Rule)
+            // null = ไม่มีเงื่อนไข ผ่านเสมอ (Default Rule)
             if (conditions == null)
             {
                 return true;
             }
 
-            // --- Check Character Type ---
+            // --- เช็คประเภทตัวละคร ---
             if (conditions.CharacterType != null)
             {
                 string charType = GetCharacterType(character, farmer);
 
-                // CharacterType accepts both single string and array
+                // CharacterType รับได้ทั้ง string เดี่ยวและ array
                 if (conditions.CharacterType is string singleType)
                 {
                     if (charType != singleType)
@@ -58,7 +58,7 @@ namespace InteractiveEmotes
                 }
                 else if (conditions.CharacterType is JArray typeArray)
                 {
-                    // Convert JArray to List<string> and check if charType is included
+                    // แปลง JArray เป็น List<string> แล้วเช็คว่า charType อยู่ในนั้นไหม
                     List<string>? allowedTypes = typeArray.ToObject<List<string>>();
                     if (allowedTypes == null || !allowedTypes.Contains(charType))
                     {
@@ -67,14 +67,14 @@ namespace InteractiveEmotes
                 }
             }
 
-            // --- Check Pet Type ---
+            // --- เช็คประเภทสัตว์เลี้ยง ---
             if (conditions.PetType != null && GetPetType(character) != conditions.PetType)
             {
                 return false;
             }
 
-            // --- NPC Specific Conditions ---
-            // If the character is not an NPC but the Rule requires an NPC condition → fail
+            // --- เงื่อนไขเฉพาะ NPC ---
+            // ถ้าตัวละครไม่ใช่ NPC แต่ Rule ต้องการเงื่อนไข NPC → ไม่ผ่าน
             if (character is NPC npc)
             {
                 if (conditions.Name != null && npc.Name != conditions.Name)
@@ -94,7 +94,7 @@ namespace InteractiveEmotes
 
                 if (config.EnableFriendshipConditions)
                 {
-                    // Get friendship points of this NPC (0 if unacquainted)
+                    // ดึงคะแนน friendship ของ NPC คนนี้ (0 ถ้ายังไม่รู้จัก)
                     int friendshipPoints = farmer.getFriendshipLevelForNPC(npc.Name);
 
                     if (conditions.FriendshipGreaterThanOrEqualTo.HasValue && friendshipPoints < conditions.FriendshipGreaterThanOrEqualTo.Value)
@@ -110,7 +110,7 @@ namespace InteractiveEmotes
             }
             else
             {
-                // Character is not an NPC, but the Rule requires NPC-only conditions → fail
+                // ตัวละครไม่ใช่ NPC แต่ Rule ต้องการเงื่อนไข NPC-only → ไม่ผ่าน
                 bool hasNpcOnlyCondition =
                     conditions.Name != null ||
                     conditions.IsSpouse.HasValue ||
@@ -124,14 +124,14 @@ namespace InteractiveEmotes
                 }
             }
 
-            // --- Check if it is a Child ---
-            // Child is not an NPC class, so it needs separate checking
+            // --- เช็คว่าเป็นเด็ก (Child) ไหม ---
+            // Child ไม่ใช่ NPC class จึงต้องเช็คแยก
             if (conditions.IsDateable.HasValue || conditions.Name != null)
             {
-                // If character is Child but has NPC condition → already handled above
+                // ถ้า character เป็น Child แต่มี NPC condition → จัดการแล้วข้างบน
             }
 
-            // --- Environmental Checks ---
+            // --- เช็คสภาพแวดล้อม ---
             if (config.EnableSeasonConditions && conditions.Season != null)
             {
                 if (!Game1.currentSeason.Equals(conditions.Season, StringComparison.OrdinalIgnoreCase))
@@ -155,7 +155,7 @@ namespace InteractiveEmotes
         // Helper methods
         // ============================================================
 
-        /// <summary>Converts a character into a string type that matches values in reactions.json</summary>
+        /// <summary>แปลงตัวละครเป็น string ประเภท ที่ตรงกับค่าใน reactions.json</summary>
         public string GetCharacterType(Character character, Farmer farmer)
         {
             if (character is FarmAnimal)   return "FarmAnimal";
@@ -171,7 +171,7 @@ namespace InteractiveEmotes
             if (character is Horse)  return "Horse";
             if (character is Pet pet)
             {
-                // Supports mods that add new pets, e.g. Turtle
+                // รองรับ mod ที่เพิ่มสัตว์เลี้ยงใหม่ เช่น Turtle
                 if (pet.GetType().Name == "Turtle") return "Turtle";
                 return pet.petType.Value;
             }
@@ -180,7 +180,7 @@ namespace InteractiveEmotes
 
         private string GetCurrentWeather()
         {
-            // Always check Lightning first, because stormy days also set isRaining = true
+            // เช็ค Lightning ก่อนเสมอ เพราะวันที่ฝนฟ้าคะนองจะ set isRaining = true ด้วย
             if (Game1.isLightning)      return "Stormy";
             if (Game1.isRaining)        return "Rainy";
             if (Game1.isDebrisWeather)  return "Windy";

@@ -1,67 +1,91 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace InteractiveEmotes
 {
-    /// <summary>Represents all reaction data for a single player emote.</summary>
+    // ============================================================
+    // ReactionModels.cs — Data structures for the Rule & Data system
+    //
+    // Data Hierarchy:
+    //   EmoteReactionData
+    //     └─ List<ReactionRule>
+    //          └─ ReactionRule
+    //               ├─ Condition   ← Required conditions (null = always pass)
+    //               └─ object Action ← String shorthand OR ComboAction object
+    // ============================================================
+
+    /// <summary>Complete data for a single emote (1 key in reactions.json)</summary>
     public class EmoteReactionData
     {
-        /// <summary>Gets or sets the list of rules for immediate, one-time reactions.</summary>
         public List<ReactionRule> Reactions { get; set; } = new();
-        /// <summary>Gets or sets the list of rules for combo reactions, triggered by repetition.</summary>
         public List<ComboRule> ComboReactions { get; set; } = new();
     }
 
-    /// <summary>Defines a single rule for an immediate reaction.</summary>
+    /// <summary>A single rule for Immediate Reaction</summary>
     public class ReactionRule
     {
-        /// <summary>Gets or sets the conditions that must be met for this rule to trigger.</summary>
         public Condition? Conditions { get; set; }
-        /// <summary>Gets or sets the action to perform. Can be a simple string (emote name) or a complex action object.</summary>
+
+        // Action can be a shorthand string (e.g. "happy")
+        // OR a ComboAction object (e.g. { "Emote": "happy", "DisplayText": "..." })
         public object Action { get; set; } = "";
     }
 
-    /// <summary>Defines a single rule for a combo reaction.</summary>
+    /// <summary>A single rule for Combo Reaction</summary>
     public class ComboRule
     {
-        /// <summary>Gets or sets the conditions that must be met for this rule to trigger.</summary>
         public Condition? Conditions { get; set; }
-        /// <summary>Gets or sets the number of times the emote must be performed to trigger this combo. If null, uses the global setting.</summary>
         public int? TriggerCount { get; set; }
-        /// <summary>Gets or sets the complex action to perform.</summary>
         public ComboAction Action { get; set; } = new();
     }
 
-    /// <summary>Represents a complex action, allowing for randomized emotes and text.</summary>
+    /// <summary>The action the NPC will perform — Shared between Reaction and Combo</summary>
     public class ComboAction
     {
-        /// <summary>Gets or sets the emote(s) to perform. Can be a single string or an array of strings for a random choice.</summary>
+        // Emote accepts both single string and array of strings for random selection
+        // e.g. "happy" or ["happy", "question", "happy"]
         public object? Emote { get; set; }
-        /// <summary>Gets or sets the translation key(s) for text to display. Can be a single string or an array of strings for a random choice.</summary>
+
+        // DisplayText accepts both single string and array of strings for random selection
+        // The value should be a translation key, e.g. "reaction.npc.angry.friend1"
         public object? DisplayText { get; set; }
     }
 
-    /// <summary>Represents a set of conditions that must be met for a rule to be triggered.</summary>
+    /// <summary>All supported conditions. Every field is nullable (null = skip check)</summary>
     public class Condition
     {
-        /// <summary>Gets or sets the name of a specific NPC to match.</summary>
+        // --- Character Conditions ---
+
+        /// <summary>The required NPC Name, e.g. "Sam", "Abigail"</summary>
         public string? Name { get; set; }
-        /// <summary>Gets or sets a value indicating whether the target must be the player's spouse.</summary>
+
+        /// <summary>Must be the player's spouse (true/false)</summary>
         public bool? IsSpouse { get; set; }
-        /// <summary>Gets or sets a value indicating whether the target must be a dateable NPC.</summary>
+
+        /// <summary>Must be a dateable NPC (true/false)</summary>
         public bool? IsDateable { get; set; }
-        /// <summary>Gets or sets the season required for the rule to trigger (e.g., "spring", "summer").</summary>
-        public string? Season { get; set; }
-        /// <summary>Gets or sets the weather required for the rule to trigger (e.g., "Rainy", "Sunny").</summary>
-        public string? Weather { get; set; }
-        /// <summary>Gets or sets the required character type(s). Can be a single string or an array of strings (e.g., "Villager", ["Pet", "FarmAnimal"]).</summary>
+
+        /// <summary>Character type. Accepts single string or array.
+        /// e.g. "Villager", "Pet", "FarmAnimal", "Baby"
+        /// or ["Baby", "Pet", "FarmAnimal"]</summary>
         public object? CharacterType { get; set; }
-        /// <summary>Gets or sets the required pet type (e.g., "Dog", "Cat", "Horse").</summary>
+
+        /// <summary>Pet type, e.g. "Dog", "Cat", "Horse", "Turtle"</summary>
         public string? PetType { get; set; }
-        /// <summary>Gets or sets the minimum friendship points required.</summary>
+
+        // --- Relationship Conditions ---
+
+        /// <summary>Minimum friendship points (must be >= this value)</summary>
         public int? FriendshipGreaterThanOrEqualTo { get; set; }
-        /// <summary>Gets or sets the exclusive maximum friendship points.</summary>
+
+        /// <summary>Maximum friendship points (must be < this value)</summary>
         public int? FriendshipLessThan { get; set; }
-        /// <summary>Gets or sets a value indicating whether the target must be the player's child.</summary>
-        public bool? IsBaby { get; set; }
+
+        // --- Environmental Conditions ---
+
+        /// <summary>Season, e.g. "spring", "summer", "fall", "winter"</summary>
+        public string? Season { get; set; }
+
+        /// <summary>Weather, e.g. "Sunny", "Rainy", "Snowy", "Stormy", "Windy"</summary>
+        public string? Weather { get; set; }
     }
 }

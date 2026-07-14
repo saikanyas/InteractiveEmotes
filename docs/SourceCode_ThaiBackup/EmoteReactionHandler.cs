@@ -8,35 +8,35 @@ namespace InteractiveEmotes
 {
     public class EmoteReactionHandler
     {
-        // Stores NPCs that have already received friendship points today (internal for console command access)
+        // เก็บชื่อ NPC ที่ได้รับ friendship point วันนี้แล้ว (internal เพื่อให้คำสั่ง console อ่านได้)
         internal static readonly HashSet<string> NpcsAwardedToday = new HashSet<string>();
 
-        // Random instance used for shuffling the Pool
+        // Random ใช้สำหรับ shuffle Pool
         private static readonly Random _random = new Random();
 
         // ============================================================
-        // DisplayText Pool — Shuffle Bag for non-repeating texts
+        // DisplayText Pool — Shuffle Bag สำหรับข้อความที่ไม่ซ้ำ
         //
-        // Key  = "npcName|text1,text2,text3" (NPC + array contents)
-        //        Separates Pools per NPC per action without needing an ID
-        // Value = Shuffled Queue<string> (drawn one by one from the front)
+        // Key  = "npcName|text1,text2,text3" (NPC + เนื้อหา array)
+        //        ทำให้แยก Pool ได้ต่อ NPC ต่อ action โดยไม่ต้องใช้ ID
+        // Value = Queue<string> ที่ถูก shuffle แล้ว (ดึงจากหน้าคิวทีละ 1)
         //
-        // When Queue is empty → refilled and reshuffled (loops)
-        // Resets when session ends (since it's only kept in memory)
+        // เมื่อ Queue ว่าง → เติมและ shuffle ใหม่ (วนรอบ)
+        // Reset เมื่อ session จบ (เพราะเก็บใน memory เท่านั้น)
         // ============================================================
         private static readonly Dictionary<string, Queue<string>> _textPools = new Dictionary<string, Queue<string>>();
 
         // ============================================================
-        // HandleReaction — Entry point for reactions
+        // HandleReaction — จุดเริ่มต้นของการตอบสนอง
         // ============================================================
 
         public static void HandleReaction(
-            List<NPC> npcs,                                    // Receives List<NPC> directly to avoid redundant searches
+            List<NPC> npcs,                                    // [แก้ไข] รับ List<NPC> โดยตรง ไม่ต้องค้นหาซ้ำ
             string emoteString,
             Dictionary<string, EmoteReactionData> rules,
             Farmer player,
             RuleProcessor ruleProcessor,
-            Dictionary<string, int> emoteNameToId,            // map name→ID for doEmote()
+            Dictionary<string, int> emoteNameToId,            // [เพิ่มใหม่] map ชื่อ→ID สำหรับ doEmote()
             ITranslationHelper i18n)
         {
             if (npcs.Count == 0)
@@ -52,9 +52,9 @@ namespace InteractiveEmotes
 
             int index = 0;
 
-            foreach (NPC npc in npcs)                         // Loop from List<NPC> directly
+            foreach (NPC npc in npcs)                         // [แก้ไข] วนลูปจาก List<NPC> ตรงๆ
             {
-                // Always check Combo first. If triggered → skip immediate reaction for this NPC
+                // เช็ค Combo ก่อนเสมอ ถ้า combo ถูก trigger → ข้าม immediate reaction ของ NPC คนนี้
                 if (emoteData.ComboReactions.Count > 0 &&
                     ComboHandler.ProcessCombo(player, npc, emoteString, emoteData.ComboReactions, ModEntry.Instance.Config, ruleProcessor, i18n))
                 {
@@ -93,7 +93,7 @@ namespace InteractiveEmotes
         }
 
         // ============================================================
-        // ReactToNpc — Makes a single NPC react based on the Rule
+        // ReactToNpc — ให้ NPC คนเดียวตอบสนองตาม Rule
         // ============================================================
 
         private static void ReactToNpc(NPC npc, ReactionRule rule, Farmer player, Dictionary<string, int> emoteNameToId, ITranslationHelper i18n)
@@ -107,7 +107,7 @@ namespace InteractiveEmotes
 
             bool didSomething = false;
 
-            // --- NPC shows Emote or Animation ---
+            // --- ให้ NPC แสดง Emote หรือ Animation ---
             string? emoteName = GetRandomString(action.Emote);
 
             if (emoteName != null)
@@ -120,7 +120,7 @@ namespace InteractiveEmotes
                 }
                 else
                 {
-                    // Use dictionary O(1) instead of looping Farmer.EMOTES every time
+                    // [แก้ไข] ใช้ dict O(1) แทนการวนลูป Farmer.EMOTES ทุกครั้ง
                     if (emoteNameToId.TryGetValue(emoteName, out int emoteId))
                     {
                         npc.doEmote(emoteId);
@@ -133,11 +133,11 @@ namespace InteractiveEmotes
                 }
             }
 
-            // --- Show text above NPC's head ---
+            // --- แสดงข้อความเหนือหัว NPC ---
             if (action.DisplayText != null)
             {
-                // If just performed an emote, wait 1200ms before showing text
-                // to prevent both from showing simultaneously and looking cluttered
+                // ถ้าเพิ่งทำ emote ไป ให้รอ 1200ms ก่อนแสดงข้อความ
+                // เพื่อให้ emote กับข้อความไม่แสดงพร้อมกันจนดูรก
                 int textDelay = didSomething ? 1200 : 0;
 
                 NPC capturedNpc = npc;
@@ -149,7 +149,7 @@ namespace InteractiveEmotes
                 );
             }
 
-            // --- Add Friendship Point and Sound ---
+            // --- เพิ่ม Friendship Point และเสียง ---
             if (didSomething)
             {
                 bool gainedPoint = TryAddFriendship(npc, player, i18n);
@@ -169,14 +169,14 @@ namespace InteractiveEmotes
         }
 
         // ============================================================
-        // DisplayText — Shows text above NPC's head using the Pool
+        // DisplayText — แสดงข้อความเหนือหัว NPC พร้อม Pool
         // ============================================================
 
-        /// <summary>Selects text from the Pool and displays it above the NPC's head.
-        /// Supports "|" to split and display sequential texts.</summary>
+        /// <summary>เลือกข้อความจาก Pool แล้วแสดงเหนือหัว NPC
+        /// รองรับ "|" สำหรับแสดงข้อความหลายชุดทีละชุด</summary>
         private static void ShowDisplayText(NPC npc, object displayTextObj, ITranslationHelper i18n)
         {
-            // Extract all text options from the object (single string or array)
+            // ดึง text options ทั้งหมดจาก object (string เดี่ยวหรือ array)
             List<string>? textOptions = GetAllStrings(displayTextObj);
 
             if (textOptions == null || textOptions.Count == 0)
@@ -184,20 +184,20 @@ namespace InteractiveEmotes
                 return;
             }
 
-            // Generate pool key from NPC + array contents
-            // to isolate Pools per NPC per action without special IDs
+            // สร้าง pool key จาก NPC + เนื้อหาของ array
+            // เพื่อให้แยก Pool ต่อ NPC ต่อ action ได้โดยไม่ต้องมี ID พิเศษ
             string poolKey = npc.Name + "|" + string.Join(",", textOptions);
 
-            // Draw a translation key from the Pool (non-repeating until empty)
+            // ดึง translation key ออกจาก Pool (ไม่ซ้ำจนกว่า Pool จะหมด)
             string textKey = DrawFromPool(poolKey, textOptions);
 
-            // Translate the key into actual text
+            // แปล key เป็นข้อความจริง
             string translatedText = i18n.Get(textKey);
 
-            // Replace special tokens like @, %farm, %pet
+            // แทนที่ token พิเศษ เช่น @, %farm, %pet
             string parsedText = ParseTokens(translatedText, npc);
 
-            // Check for "|" (separator for multi-part messages)
+            // เช็คว่ามี "|" ไหม (สัญลักษณ์แบ่งข้อความยาวเป็นชุด)
             if (parsedText.Contains("|"))
             {
                 string[] parts = parsedText.Split('|');
@@ -208,7 +208,7 @@ namespace InteractiveEmotes
                     int partIndex = i;
                     NPC capturedNpc = npc;
 
-                    // Show sequentially, delayed by 1800ms per part
+                    // แสดงทีละชุด โดยหน่วงเวลา 1800ms ต่อชุด
                     DelayedAction.functionAfterDelay(
                         () => capturedNpc.showTextAboveHead(part),
                         partIndex * 1800
@@ -225,28 +225,28 @@ namespace InteractiveEmotes
         // Pool Management — Shuffle Bag
         // ============================================================
 
-        /// <summary>Draws 1 string from the Pool.
-        /// If Pool is empty or missing → creates and shuffles a new one</summary>
+        /// <summary>ดึง 1 string จาก Pool
+        /// ถ้า Pool ว่างหรือยังไม่มี Pool สำหรับ key นี้ → สร้างและ shuffle ใหม่</summary>
         private static string DrawFromPool(string poolKey, List<string> allOptions)
         {
-            // If no Pool exists for this key, or Pool is empty → create new
+            // ถ้าไม่มี Pool สำหรับ key นี้ หรือ Pool ว่างแล้ว → สร้างใหม่
             if (!_textPools.ContainsKey(poolKey) || _textPools[poolKey].Count == 0)
             {
                 _textPools[poolKey] = CreateShuffledQueue(allOptions);
             }
 
-            // Draw from the front of the queue (FIFO)
+            // ดึงจากหน้าคิว (FIFO) 1 อัน
             return _textPools[poolKey].Dequeue();
         }
 
-        /// <summary>Copies the list, randomizes order using Fisher-Yates Shuffle,
-        /// and enqueues it for FIFO retrieval.</summary>
+        /// <summary>คัดลอก list แล้วสุ่มลำดับด้วย Fisher-Yates Shuffle
+        /// แล้วใส่เข้า Queue เพื่อให้ดึงแบบ FIFO ได้</summary>
         private static Queue<string> CreateShuffledQueue(List<string> options)
         {
-            // Copy first to avoid modifying the original list
+            // คัดลอกก่อนเพื่อไม่แก้ list ต้นฉบับ
             List<string> shuffled = new List<string>(options);
 
-            // Fisher-Yates Shuffle: Random swap from back to front
+            // Fisher-Yates Shuffle: สลับตำแหน่งแบบสุ่มจากหลังไปหน้า
             for (int i = shuffled.Count - 1; i > 0; i--)
             {
                 int j = _random.Next(i + 1);
@@ -259,13 +259,13 @@ namespace InteractiveEmotes
         }
 
         // ============================================================
-        // Token Parser — Replaces special tokens in text
+        // Token Parser — แทนที่ token พิเศษในข้อความ
         // ============================================================
 
-        /// <summary>Replaces special tokens with actual player/game values</summary>
+        /// <summary>แทนที่ token พิเศษด้วยค่าจริงของผู้เล่น/เกม</summary>
         private static string ParseTokens(string text, NPC speaker)
         {
-            // "^" separates text by player gender. Format: "MaleText^FemaleText"
+            // "^" แยกข้อความตามเพศผู้เล่น รูปแบบ: "ข้อความชาย^ข้อความหญิง"
             if (text.Contains("^"))
             {
                 string[] parts = text.Split('^');
@@ -276,8 +276,8 @@ namespace InteractiveEmotes
             text = text.Replace("%farm", Game1.player.farmName.Value);
             text = text.Replace("%favorite_thing", Game1.player.favoriteThing.Value);
 
-            // Check for null before replacing to prevent NullReferenceException
-            // from other mods that might cause petName to be null
+            // [แก้ไข] เช็ค null ก่อน replace เพื่อป้องกัน NullReferenceException
+            // จาก mod อื่นที่อาจทำให้ petName เป็น null ได้
             if (Game1.player.hasPet())
             {
                 string petName = Game1.player.getPetName() ?? "";
@@ -297,16 +297,16 @@ namespace InteractiveEmotes
         // Helper Methods
         // ============================================================
 
-        /// <summary>Parses an Action object (string or JObject) into a ComboAction</summary>
+        /// <summary>แปลง Action object (string หรือ JObject) เป็น ComboAction</summary>
         private static ComboAction? ParseAction(object actionObj)
         {
-            // Handle string shorthand e.g. "Action": "happy"
+            // กรณี string ย่อ เช่น "Action": "happy"
             if (actionObj is string actionString)
             {
                 return new ComboAction { Emote = actionString };
             }
 
-            // Handle object e.g. "Action": { "Emote": "happy", "DisplayText": "..." }
+            // กรณี object เช่น "Action": { "Emote": "happy", "DisplayText": "..." }
             if (actionObj is JObject jObject)
             {
                 try
@@ -323,8 +323,8 @@ namespace InteractiveEmotes
             return null;
         }
 
-        /// <summary>Takes an object (string or string[]) and returns 1 string (randomized if array).
-        /// Used for Emotes that only require 1 value.</summary>
+        /// <summary>รับ object ที่อาจเป็น string หรือ string[] แล้วคืน 1 string (สุ่มถ้าเป็น array)
+        /// ใช้สำหรับ Emote ที่ต้องการแค่ 1 ค่า</summary>
         private static string? GetRandomString(object? obj)
         {
             if (obj == null)
@@ -350,8 +350,8 @@ namespace InteractiveEmotes
             return null;
         }
 
-        /// <summary>Takes an object (string or string[]) and returns the full List.
-        /// Used for DisplayText which requires all options to build the Pool.</summary>
+        /// <summary>รับ object ที่อาจเป็น string หรือ string[] แล้วคืน List ทั้งหมด
+        /// ใช้สำหรับ DisplayText ที่ต้องการ options ทั้งหมดเพื่อสร้าง Pool</summary>
         private static List<string>? GetAllStrings(object? obj)
         {
             if (obj == null)
@@ -372,8 +372,8 @@ namespace InteractiveEmotes
             return null;
         }
 
-        /// <summary>Grants friendship points if not awarded today, and shows HUD message.
-        /// Returns true if successfully gained points, false otherwise.</summary>
+        /// <summary>เพิ่ม friendship point ให้ NPC ถ้ายังไม่ได้รับในวันนี้ และแสดง HUD
+        /// คืนค่า true ถ้าได้ point สำเร็จ, คืนค่า false ถ้าไม่ได้</summary>
         private static bool TryAddFriendship(NPC npc, Farmer player, ITranslationHelper i18n)
         {
             int gainAmount = ModEntry.Instance.Config.FriendshipGainAmount;
@@ -392,11 +392,11 @@ namespace InteractiveEmotes
 
             if (ModEntry.Instance.Config.ShowFriendshipGainMessage)
             {
-                // Try to get text from i18n, fallback to default if not found
+                // ลองดึง text จาก i18n ถ้าไม่มีให้ใช้ค่า default (fallback)
                 string msgKey = "message.friendship.gain";
                 string translatedMsg = i18n.Get(msgKey, new { npcName = npc.displayName, amount = gainAmount });
                 
-                // If translation file is missing, it returns the key (or contains key format)
+                // ถ้าหาไฟล์แปลไม่เจอ มันจะคืนค่า key คืนมา (หรือมีวงเล็บ)
                 if (translatedMsg == msgKey || translatedMsg.Contains("message.friendship"))
                 {
                     translatedMsg = $"+{gainAmount} Friendship with {npc.displayName}";
@@ -410,7 +410,7 @@ namespace InteractiveEmotes
             return true;
         }
 
-        /// <summary>Called overnight to clear the list of NPCs that were awarded points today.</summary>
+        /// <summary>เรียกตอนข้ามวันเพื่อล้างรายชื่อ NPC ที่ได้คะแนนไปแล้ว</summary>
         public static void ClearDailyNpcLimits()
         {
             NpcsAwardedToday.Clear();
